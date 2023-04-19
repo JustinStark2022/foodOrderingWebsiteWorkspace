@@ -22,3 +22,21 @@ darkmode.onclick = () => {
 		document.body.classList.remove('dark')
 	}
 }
+
+async function fetchItems() {
+	const response = await fetch('/items');
+	const items = await response.json();
+	// Render items in the frontend
+  }
+  
+  async function addItem(name) {
+	const response = await fetch('/items', {
+	  method: 'POST',
+	  headers: {
+		'Content-Type': 'application/json',
+	  },
+	  body: JSON.stringify({name: name}),
+	});
+	const newItem = await response.json();
+	// Update the frontend with the new item
+  }
