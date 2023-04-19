@@ -238,7 +238,8 @@ section{
 	width: 100%;
 }
 .history-text strong{
-	font-size: var(--p-font);
+	/*font-size: var(--p-font);*/
+	font-size: 24px;
 	font-weight: 500;
 	color: var(--main-color);
 }
@@ -311,75 +312,6 @@ section{
 	margin-top: 3rem;
 }
 
-.testimonial{
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	align-items: center;
-	gap: 2rem;
-}
-.testimonial-left strong{
-	font-size: var(--p-font);
-	font-weight: 500;
-	color: var(--main-color);
-}
-.testimonial-left h2{
-	font-size: var(--h2-font);
-	font-weight: 900;
-	line-height: 1.2;
-	margin: 20px 0;
-	font-family: 'Playfair Display', serif;
-}
-.testimonial-img img{
-	width: 100%;
-	max-width: 160px;
-	height: auto;
-	margin-bottom: 15px;
-}
-.testimonial-right h4{
-	font-size: 22px;
-	font-weight: 900;
-	margin-bottom: 8px;
-	font-family: 'Playfair Display', serif;
-}
-.testimonial-right h6{
-	color: var(--main-color);
-	font-size: 15px;
-	font-weight: 800;
-	margin-bottom: 20px;
-}
-.testimonial-right p{
-	font-size: var(--p-font);
-	line-height: 32px;
-	color: var(--other-color);
-}
-
-.newsletter{
-	display: grid;
-	justify-items: center;
-}
-.newsletter form{
-	display: flex;
-	margin-top: 2.5rem;
-	padding: 10px 20px;
-	background: var(--bb-color);
-	box-shadow: -1px 15px 26px -4px rgb(161 151 151 / 15%);
-	border-radius: 0.5rem;
-}
-.newsletter form .email{
-	width: 250px;
-	max-width: 100%;
-}
-.newsletter form input{
-	outline: none;
-	border: none;
-	background: none;
-	color: var(--text-color);
-	font-size: var(--p-font);
-}
-.newsletter form .btn{
-	background: var(--main-color);
-	color: var(--bg-color);
-}
 
 .contact{
 	display: grid;
