@@ -48,10 +48,10 @@ def login():
 
     return render_template('login.html')
 
-@app.route('/admin')
-def admin_dashboard():
-    orders = mongo.db.orders.find()
-    return render_template('admin.html', orders=orders)
+@app.route('/adminDashBoard')
+def adminDashBoard():
+   
+    return render_template('adminDashBoard.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

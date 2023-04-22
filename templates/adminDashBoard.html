@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Groupie's Pizza</title>
+
+	<!---======css=====-->
+	<link rel="stylesheet" type="text/css" href="/static/css/admin.css">
+
+	<!--===box icons link--==-->
+	<link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+  <!--===google fonts link--==-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<!--===header--==-->
+<header>
+	<a href="/" class="logo" style="margin-left: 75px;">
+		<img src="/static/img/logo.png">
+	</a>
+	
+	
+
+	<ul class="navbar">
+		<li><a href="menu">Menu</a></li>
+	</ul>
+
+	<div class="header-icons">
+		<div>
+			<a href="login"  >
+				<button style="padding-left: 10px; padding-right: 10px;">Login</button>
+			</a>
+		</div>	
+		
+	
+
+		<!----darkmode-->
+		<div class="bx bx-moon" id="darkmode"></div>
+	</div>
+</header>
+	<fieldset style="margin-top: 200px;">
+		<legend>Add Menu Item Form</legend>
+		<form action="" method="post" name="first_form" enctype="multipart/form-data" onsubmit="validation()">
+		<p><label for="email">Item Name:</label><input type="text" name="email" maxlength="50"  value="" class="input"/></p>
+		<p><label for="email">Item Price:</label><input type="text" name="price" maxlength="10"  value="" class="input"/></p>
+		<p><label for="file">Upload Item Picture:</label><input type="file" name="userfile" class="input" /></p>
+		<input type="hidden" name="actionflag" value="save" />
+		<input type="hidden" name="chech_file_size" value="5000"/>
+		<p><label for="gender">Size:</label><input type="radio" name="size-large" value="large" />Large<input type="radio" name="size-medium" value="medium" />Medium<input type="radio" name="size-small" value="small" />Small<br /></p>
+		<p><label for="description">Description</label><textarea rows="6" cols="25" name="description"></textarea></p>
+		<p><input type="submit" value="Submit" class="submit"/></p>
+		</form>
+	</fieldset>
+	<!--===menu--==-->
+	<section class="menu" id="menu">
+		<div class="center-text" style="margin-top: 200px;">
+			<strong>Our Menu</strong>
+		</div>
+
+		<div class="menu-content">
+			<div class="row">
+				<div class="row-img">
+					<img src="/static/img/m1.png">
+				</div>
+				<h5>Pepperoni Cheesy<br> Bread Sticks</h5>
+				<h6>$12.99</h6>
+				
+			</div>
+
+			<div class="row">
+				<div class="row-img">
+					<img src="/static/img/m2.png">
+				</div>
+				<h5>Groupie's Style<br>Supreme Pizza</h5>
+				<h6>$12.99</h6>
+				
+			</div>
+
+			<div class="row">
+				<div class="row-img">
+					<img src="/static/img/m3.png">
+				</div>
+				<h5>Meat Lovers<br>Pazone</h5>
+				<h6>$10.99</h6>
+				
+			</div>
+
+			<div class="row">
+				<div class="row-img">
+					<img src="/static/img/m4.png">
+				</div>
+				<h5>Groupie's Signature<br>Buffalo Wings</h5>
+				<h6>$9.99</h6>
+				
+			</div>
+			<div class="row">
+				<div class="row-img">
+					<img src="/static/img/m4.png">
+				</div>
+				<h5>Groupie's Signature<br>Buffalo Wings</h5>
+				<h6>$9.99</h6>
+				
+			</div>
+			<div class="row">
+				<div class="row-img">
+					<img src="/static/img/m4.png">
+				</div>
+				<h5>Groupie's Signature<br>Buffalo Wings</h5>
+				<h6>$9.99</h6>
+				
+			</div>
+			<div class="row">
+				<div class="row-img">
+					<img src="/static/img/m4.png">
+				</div>
+				<h5>Groupie's Signature<br>Buffalo Wings</h5>
+				<h6>$9.99</h6>
+				
+			</div>
+			<div class="row">
+				<div class="row-img">
+					<img src="/static/img/m4.png">
+				</div>
+				<h5>Groupie's Signature<br>Buffalo Wings</h5>
+				<h6>$9.99</h6>
+				
+			</div>
+			<div class="row">
+				<div class="row-img">
+					<img src="/static/img/m4.png">
+				</div>
+				<h5>Groupie's Signature<br>Buffalo Wings</h5>
+				<h6>$9.99</h6>
+				
+			</div>
+			<div class="row">
+				<div class="row-img">
+					<img src="/static/img/m4.png">
+				</div>
+				<h5>Groupie's Signature<br>Buffalo Wings</h5>
+				<h6>$9.99</h6>
+			
+			</div>
+			<div class="row">
+				<div class="row-img">
+					<img src="/static/img/m4.png">
+				</div>
+				<h5>Groupie's Signature<br>Buffalo Wings</h5>
+				<h6>$9.99</h6>
+				
+			</div>
+			<div class="row">
+				<div class="row-img">
+					<img src="/static/img/m4.png">
+				</div>
+				<h5>Groupie's Signature<br>Buffalo Wings</h5>
+				<h6>$9.99</h6>
+				
+			</div>
+			<div class="row">
+				<div class="row-img">
+					<img src="/static/img/m4.png">
+				</div>
+				<h5>Groupie's Signature<br>Buffalo Wings</h5>
+				<h6>$9.99</h6>
+				
+			</div>
+			<div class="row">
+				<div class="row-img">
+					<img src="/static/img/m4.png">
+				</div>
+				<h5>Groupie's Signature<br>Buffalo Wings</h5>
+				<h6>$9.99</h6>
+				
+			</div>
+			<div class="row">
+				<div class="row-img">
+					<img src="/static/img/m4.png">
+				</div>
+				<h5>Groupie's Signature<br>Buffalo Wings</h5>
+				<h6>$9.99</h6>
+				
+			</div>
+			
+		</div>
+
+	</section>
+
+    
+	<!--===js file link--==-->
+	<script src="/static/js/script.js"></script>
+
+</body>
+</html>
