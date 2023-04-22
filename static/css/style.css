@@ -299,11 +299,7 @@ section{
 	font-size: 18px;
 	font-weight: 900;
 }
-.ratings i{
-	font-size: 1rem;
-	color: var(--rr-color);
-	margin: 0 2px;
-}
+
 .row:hover{
 	transform: translateY(-8px);
 }
@@ -499,10 +495,7 @@ section{
 }
 
 @media (max-width: 500px){
-	.newsletter form .email{
-		width: 155px;
-		max-width: 100%;
-	}
+	
 	:root{
 		--big-font: 2.7rem;
 	  --h2-font: 1.8rem;

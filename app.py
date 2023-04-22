@@ -21,7 +21,16 @@ def about():
 def menu():
     return render_template('menu.html')
 
-@app.route('/index')
+@app.route('/register')
+def register():
+    return render_template('register.html')
+
+@app.route('/shoppingcart')
+def shoppingcart():
+    return render_template('shoppingcart.html')
+
+
+@app.route('/')
 def index():
     return render_template('index.html')
 
@@ -33,7 +42,7 @@ def login():
         admin = mongo.groupies.users.find_one({'username': username})
 
         if admin and check_password_hash(admin['password'], password):
-            return redirect(url_for('admin_dashboard'))
+            return redirect(url_for('index.html'))
         else:
             flash('Invalid username or password', 'danger')
 

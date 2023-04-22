@@ -1,34 +1,41 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Groupie's Pizza</title>
 
-	<!---======css=====-->
-	<link rel="stylesheet" type="text/css" href="/static/css/style.css">
-
-	<!--===box icons link--==-->
-	<link rel="stylesheet"
-    href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-
-  <!--===google fonts link--==-->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-</head>
-<body>
-
-	
-	
-    <!--===copyright--==-->
-    <div class="copyright">
-	    <p>Copyright Group 4 CS 492 Colorado Technical University 2023</p>
-    </div>
-
-
-	<!--===js file link--==-->
-	<script src="/static/js/script.js"></script>
-
-</body>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>Groupie's Pizza Registration</title>
+      <link rel="stylesheet" href="/static/css/login.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+   </head>
+   <body>
+		<div class="container">
+        	<label for="show" class="close-btn fas fa-times" title="close"></label>
+        	<div class="text">
+          		Registration Form
+        	</div>
+        	<form action="Register" method="POST">
+				<div class="data">
+					<label>username</label>
+					<input type="text" required>
+			 	</div>
+			 	<div class="data">
+					<label>password</label>
+					<input type="password" required>
+			 	</div>
+				<div class="data">
+				 	<label>confirm password</label>
+				  	<input type="password" required>
+			    </div>
+			
+			 	<div class="btn">
+					<div class="inner"></div>
+					<button type="submit">Register</button>
+			 	</div>
+			 	<div class="signup-link">
+					Already a member? <a href="login">Login now</a>
+				</div>
+		
+        	</form>
+    	</div>
+    </body>
 </html>

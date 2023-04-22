@@ -1,34 +1,79 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Groupie's Pizza</title>
+<html lang="en">
 
-	<!---======css=====-->
-	<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+	<head>
+		<meta charset="UTF-8">
+    	<title>Groupie's Pizza Shopping Cart</title>
+    	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="/static/css/shoppingcart.css" rel="stylesheet">
+		<!--===box icons link--==-->
+		<link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+		<!--===google fonts link--==-->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+	</head>
 
-	<!--===box icons link--==-->
-	<link rel="stylesheet"
-    href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-
-  <!--===google fonts link--==-->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-</head>
-<body>
-
-	
-	
-    <!--===copyright--==-->
-    <div class="copyright">
-	    <p>Copyright Group 4 CS 492 Colorado Technical University 2023</p>
-    </div>
-
-
-	<!--===js file link--==-->
-	<script src="/static/js/script.js"></script>
-
-</body>
+	<body>
+		<!--===header--==-->
+		<header>
+			<a href="/" class="logo">
+				<img src="/static/img/logo.png">
+			</a>
+			<ul class="navbar">
+				<li><a href="/" class="active">Home</a></li>
+				<li><a href="about">History of Groupie's Pizza</a></li>
+				<li><a href="menu">Menu</a></li>
+			</ul>
+			<div class="header-icons">
+				<a href="shoppingcart"><i class='bx bxs-cart' ></i></a>
+			</div>
+		</header>
+		<!--===shoppingcart--==-->
+    	<div class="wrapper" style="margin-top: 250px;">
+			<h1>Shopping Cart</h1>
+			<div class="project">
+				<div class="shop">
+					<div class="cart-box">
+				    	<img src="/static/img/m1.png">
+						<div class="content">
+							<h3>Pepperoni Cheesy<br> Bread Sticks</h3>
+							<h4>Price: $12.99</h4>
+							<p class="unit">Quantity: <input name="" value="2"></p>
+							<p class="btn-area"><i aria-hidden="true" class="fa fa-trash"></i> <span class="btn2">Remove</span></p>
+						</div>
+					</div>
+					<div class="cart-box">
+						<img src="/static/img/m2.png">
+						<div class="content">
+							<h3>Groupie's Style<br>Supreme Pizza</h3>
+							<h4>Price: $12.99</h4>
+							<p class="unit">Quantity: <input name="" value="1"></p>
+							<p class="btn-area"><i aria-hidden="true" class="fa fa-trash"></i> <span class="btn2">Remove</span></p>
+						</div>
+					</div>
+					<div class="cart-box">
+						<img src="/static/img/m3.png">
+						<div class="content">
+							<h3>Meat Lovers<br>Pazone</h3>
+							<h4>Price: $10.99</h4>
+							<p class="unit">Quantity: <input name="" value="0"></p>
+							<p class="btn-area"><i aria-hidden="true" class="fa fa-trash"></i> <span class="btn2">Remove</span></p>
+						</div>
+					</div>
+				</div>
+				<div class="right-bar">
+					<p><span>Subtotal</span> <span>$120</span></p>
+					<hr>
+					<p><span>Tax (5%)</span> <span>$6</span></p>
+					<hr>
+					<p><span>Shipping</span> <span>$15</span></p>
+					<hr>
+					<p><span>Total</span> <span>$141</span></p><a href="#"><i class="fa fa-shopping-cart"></i>Checkout</a>
+				</div>
+			</div>
+		</div>
+		<!--===js file link--==-->
+		<script src="/static/js/script.js"></script>
+	</body>
 </html>
