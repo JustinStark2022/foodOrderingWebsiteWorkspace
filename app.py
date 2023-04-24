@@ -16,7 +16,7 @@ app.secret_key = b'***REMOVED***'
 mongo = PyMongo(app)
 
 db = client.groupies
-collection = db.groupies
+coll = db.groupies
 users=db.users
 
 def item_serializer(item):
@@ -53,9 +53,9 @@ def login():
 
 @app.route('/admin')
 def admin():
-#    orders = mongo.db.orders.find()
-#    return render_template('admin.html', orders=orders)
-    return render_template('admin.html')
+    items = db.items.find()
+    return render_template('admin.html', items=items)
+#    return render_template('admin.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
