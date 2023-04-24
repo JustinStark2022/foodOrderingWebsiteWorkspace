@@ -12,6 +12,7 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 
 app = Flask(__name__, template_folder='templates')
 app.config['MONGO_URI'] = '***REMOVED***'
+app.secret_key = b'***REMOVED***'
 mongo = PyMongo(app)
 
 db = client.groupies
@@ -39,11 +40,11 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        username = request.form.get('username')
+        password = request.form.get('password')
         admin = users.find_one({'username': username})
 
-        if password == admin['password']:
+        if admin is not None and password == admin['password']:
             return redirect('/admin.html')
         else:
             flash('Invalid username or password', 'danger')
