@@ -45,17 +45,28 @@
 	<fieldset style="margin-top: 200px;">
 		<legend>Add Menu Item Form</legend>
 		<form action="" method="post" name="first_form" enctype="multipart/form-data" onsubmit="validation()">
-		<p><label for="email">Item Name:</label><input type="text" name="email" maxlength="50"  value="" class="input"/></p>
-		<p><label for="email">Item Price:</label><input type="text" name="price" maxlength="10"  value="" class="input"/></p>
-		<p><label for="file">Upload Item Picture:</label><input type="file" name="userfile" class="input" /></p>
-		<input type="hidden" name="actionflag" value="save" />
-		<input type="hidden" name="chech_file_size" value="5000"/>
-		<p><label for="gender">Size:</label><input type="radio" name="size-large" value="large" />Large<input type="radio" name="size-medium" value="medium" />Medium<input type="radio" name="size-small" value="small" />Small<br /></p>
-		<p><label for="description">Description</label><textarea rows="6" cols="25" name="description"></textarea></p>
-		<p><input type="submit" value="Submit" class="submit"/></p>
+			<p><label for="email">Item Name:</label><input type="text" name="email" maxlength="50"  value="" class="input"/></p>
+			<p><label for="email">Item Price:</label><input type="text" name="price" maxlength="10"  value="" class="input"/></p>
+			<p><label for="file">Upload Item Picture:</label><input type="file" name="userfile" class="input" /></p>
+			<input type="hidden" name="actionflag" value="save" />
+			<input type="hidden" name="chech_file_size" value="5000"/>
+			<p><label for="gender">Size:</label><input type="radio" name="size-large" value="large" />Large<input type="radio" name="size-medium" value="medium" />Medium<input type="radio" name="size-small" value="small" />Small<br /></p>
+			<p><label for="description">Description</label><textarea rows="6" cols="25" name="description"></textarea></p>
+			<p><input type="submit" value="Submit" class="submit"/></p>
 		</form>
 	</fieldset>
 	<!--===menu--==-->
+
+	{% for item in items %}    
+	<tr class="data">    
+  
+		<td class="name">{{ item["name"] }}</td>    
+		<td class="price">{{ item["price"] }}</td>    
+<!--		<td class="func1"><a href="./remove?_id={{ item['_id'] }}"><button type="submit">DELETE</button></a></td>    
+		<td class="func1"><a href="./update?_id={{ item['_id'] }}"><button type="submit">EDIT</button></a></td>    -->
+	</tr>    
+	{% endfor %}    
+
 	<section class="menu" id="menu">
 		<div class="center-text" style="margin-top: 200px;">
 			<strong>Our Menu</strong>
