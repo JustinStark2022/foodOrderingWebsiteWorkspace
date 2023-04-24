@@ -47,159 +47,37 @@
 		<form action="" method="post" name="first_form" enctype="multipart/form-data" onsubmit="validation()">
 			<p><label for="newName">Item Name:</label><input type="text" name="newName" maxlength="50"  value="" class="input"/></p>
 			<p><label for="newPrice">Item Price:</label><input type="text" name="newPrice" maxlength="10"  value="" class="input"/></p>
-			<p><label for="file">Upload Item Picture:</label><input type="file" name="userfile" class="input" /></p>
-			<input type="hidden" name="actionflag" value="save" />
-			<input type="hidden" name="chech_file_size" value="5000"/>
-			<p><label for="gender">Size:</label><input type="radio" name="size-large" value="large" />Large<input type="radio" name="size-medium" value="medium" />Medium<input type="radio" name="size-small" value="small" />Small<br /></p>
-			<p><label for="description">Description</label><textarea rows="6" cols="25" name="description"></textarea></p>
+			
+			
+			
 			<p><input type="submit" value="Submit" class="submit"/></p>
 		</form>
 	</fieldset>
 	<!--===menu--==-->
-
-	{% for item in items %}    
-	<tr class="data">    
-  
-		<td class="name">{{ item["name"] }}</td>    
-		<td class="price">{{ item["price"] }}</td>    
-<!--		<td class="func1"><a href="./remove?_id={{ item['_id'] }}"><button type="submit">DELETE</button></a></td>    
-		<td class="func1"><a href="./update?_id={{ item['_id'] }}"><button type="submit">EDIT</button></a></td>    -->
-	</tr>    
-	{% endfor %}    
-
-	<section class="menu" id="menu">
-		<div class="center-text" style="margin-top: 200px;">
-			<strong>Our Menu</strong>
-		</div>
-
-		<div class="menu-content">
-			<div class="row">
+	<section class="menu" id="menu"></section>
+	<div class="center-text" style="margin-top: 200px;">
+		<strong>Our Menu</strong>
+		<h2>Pizza at its finest</h2>
+	</div>
+	<div class="menu-content">
+	{% for item in items %} 
+	
+		
+			<div class="row">    
 				<div class="row-img">
 					<img src="/static/img/m1.png">
-				</div>
-				<h5>Pepperoni Cheesy<br> Bread Sticks</h5>
-				<h6>$12.99</h6>
-				
-			</div>
+				</div>	
+				<h5 class="name">{{ item["name"] }}</h5>    
+				<h6 class="price">{{ item["price"] }}</h6>  
+				<button onclick="" type="button" class="btn btn-primary">Add to Cart</button> 
+			</div>  
 
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m2.png">
-				</div>
-				<h5>Groupie's Style<br>Supreme Pizza</h5>
-				<h6>$12.99</h6>
-				
-			</div>
-
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m3.png">
-				</div>
-				<h5>Meat Lovers<br>Pazone</h5>
-				<h6>$10.99</h6>
-				
-			</div>
-
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				
-			</div>
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				
-			</div>
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				
-			</div>
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				
-			</div>
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				
-			</div>
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				
-			</div>
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
 			
-			</div>
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				
-			</div>
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				
-			</div>
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				
-			</div>
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				
-			</div>
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				
-			</div>
-			
-		</div>
+		
 
-	</section>
+	{% endfor %}    
+</div>
+</section>
 
     
 	<!--===js file link--==-->

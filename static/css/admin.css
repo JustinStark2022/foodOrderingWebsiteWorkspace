@@ -265,6 +265,8 @@ section{
 	align-items: center;
 	text-align: center;
 	margin-top: 4rem;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 .row{
 	display: flex;
