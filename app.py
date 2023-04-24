@@ -51,11 +51,20 @@ def login():
 
     return render_template('login.html')
 
-@app.route('/admin')
+@app.route('/admin', methods=['GET', 'POST'])
 def admin():
-    items = db.items.find()
-    return render_template('admin.html', items=items)
-#    return render_template('admin.html')
+    if request.method=='GET':
+        items = db.items.find()
+        return render_template('admin.html', items=items)
+    
+    if request.method=='POST':
+        items = db.items.find()
+        newName = request.form.get('newName')
+        newPrice = request.form.get('newPrice')
+
+        db.items.insert_one({'name':newName,'price':newPrice})
+        
+        return render_template('admin.html', items=items)
 
 if __name__ == '__main__':
     app.run(debug=True)
