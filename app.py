@@ -45,14 +45,14 @@ def login():
         admin = users.find_one({'username': username})
 
         if admin is not None and password == admin['password']:
-            return redirect('/admin.html')
+            return redirect('admin')
         else:
             flash('Invalid username or password', 'danger')
 
     return render_template('login.html')
 
 @app.route('/admin')
-def admin_dashboard():
+def admin():
 #    orders = mongo.db.orders.find()
 #    return render_template('admin.html', orders=orders)
     return render_template('admin.html')
