@@ -61,7 +61,8 @@ def about():
 
 @app.route('/menu')
 def menu():
-    return render_template('menu.html')
+    items = db.items.find()
+    return render_template('menu.html', items=items)
 
 @app.route('/')
 def index():
@@ -123,7 +124,8 @@ def image(filename):
     
 @app.route('/register')
 def register():
-    return render_template('/register.html')
+    if request.method==('GET'):
+        return render_template('register.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
