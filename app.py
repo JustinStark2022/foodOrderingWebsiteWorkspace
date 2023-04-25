@@ -4,6 +4,8 @@ from bson.objectid import ObjectId
 #from werkzeug.security import generate_password_hash, check_password_hash
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+from gridfs import GridFS
+from flask import Response
 
 uri = "mongodb+srv://groupiespizzaadmin:Groupies12345@cluster0.3iw3bwg.mongodb.net/?retryWrites=true&w=majority"
 
@@ -23,6 +25,8 @@ def item_serializer(item):
     return {
         "id": str(item["_id"]),
         "name": item["name"],
+        "price": item["price"],
+        "image": item["image"]
     }
 
 @app.route('/about')
@@ -53,18 +57,34 @@ def login():
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
-    if request.method=='GET':
+    if request.method == 'GET':
         items = db.items.find()
         return render_template('admin.html', items=items)
     
-    if request.method=='POST':
+    if request.method == 'POST':
         items = db.items.find()
         newName = request.form.get('newName')
         newPrice = request.form.get('newPrice')
-
-        db.items.insert_one({'name':newName,'price':newPrice})
         
+        if newName and newPrice and 'newImage' in request.files:
+            newImage = request.files['newImage']
+            fs = GridFS(db)
+            image_id = fs.put(newImage, filename=newImage.filename, content_type=newImage.content_type)
+            db.items.insert_one({'name': newName, 'price': newPrice, 'image': newImage.filename, 'image_id': image_id})
+            flash('Item added successfully', 'success')
+        else:
+            flash('Please fill in all the fields and provide an image', 'danger')
+
         return render_template('admin.html', items=items)
+    
+@app.route('/image/<filename>')
+def image(filename):
+    fs = GridFS(db)
+    image = fs.find_one({'filename': filename})
+    if image:
+        return Response(image.read(), content_type=image.content_type)
+    else:
+        return "Image not found", 404
 
 if __name__ == '__main__':
     app.run(debug=True)

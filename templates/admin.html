@@ -44,12 +44,10 @@
 </header>
 	<fieldset style="margin-top: 200px;">
 		<legend>Add Menu Item Form</legend>
-		<form action="" method="post" name="first_form" enctype="multipart/form-data" onsubmit="validation()">
-			<p><label for="newName">Item Name:</label><input type="text" name="newName" maxlength="50"  value="" class="input"/></p>
-			<p><label for="newPrice">Item Price:</label><input type="text" name="newPrice" maxlength="10"  value="" class="input"/></p>
-			
-			
-			
+		<form action="/admin" method="post" name="first_form" enctype="multipart/form-data" onsubmit="validation()">
+			<p><label for="newName">Item Name:</label><input type="text" name="newName" maxlength="50"  class="input"/></p>
+			<p><label for="newPrice">Item Price:</label><input type="number" name="newPrice" maxlength="10"  class="input"/></p>
+			<p><label for="newImage">Item Picture:</label><input type="file" name="newImage" class="input"/></p>
 			<p><input type="submit" value="Submit" class="submit"/></p>
 		</form>
 	</fieldset>
@@ -65,7 +63,7 @@
 		
 			<div class="row">    
 				<div class="row-img">
-					<img src="/static/img/m1.png">
+					<img src="{{ url_for('image', filename=item['image']) }}" alt="Item image">
 				</div>	
 				<h5 class="name">{{ item["name"] }}</h5>    
 				<h6 class="price">{{ item["price"] }}</h6>  
