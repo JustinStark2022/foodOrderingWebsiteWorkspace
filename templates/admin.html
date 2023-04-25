@@ -28,16 +28,15 @@
 	<ul class="navbar">
 		<li><a href="menu">Menu</a></li>
 	</ul>
-
+	
 	<div class="header-icons">
 		<div>
-			<a href="login"  >
-				<button style="padding-left: 10px; padding-right: 10px;">Login</button>
+			<a href="{{ url_for('logout') }}">
+				<button style="padding-left: 10px; padding-right: 10px;">Logout</button>
 			</a>
 		</div>	
 		
 	
-
 		<!----darkmode-->
 		<div class="bx bx-moon" id="darkmode"></div>
 	</div>
