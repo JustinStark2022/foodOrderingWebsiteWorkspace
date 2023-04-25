@@ -49,6 +49,31 @@ def load_user(username):
     else:
         return None
 
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+class User(UserMixin):
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
+        self.active = True
+
+    def get_id(self):
+        return self.username
+
+    @property
+    def is_active(self):
+        return self.active
+    
+@login_manager.user_loader
+def load_user(username):
+    user_data = users.find_one({'username': username})
+    if user_data:
+        return User(username=user_data['username'], password=user_data['password'])
+    else:
+        return None
+
 def item_serializer(item):
     return {
         "id": str(item["_id"]),
@@ -141,7 +166,11 @@ def register():
         if password != confirmPass:
             flash('Password field must match')
 
+<<<<<<< HEAD
         elif existing_user != username & password == confirmPass:
+=======
+        elif existing_user is None & password == confirmPass:
+>>>>>>> 5c6bd4863457c67a4a89fe3912632838b05a0cff
             hashed_password = generate_password_hash(password)
             users.insert_one({'username': username, 'email': email, 'password': hashed_password, 'role': 'customer'})
             flash('Registration successful!', 'success')
@@ -158,13 +187,21 @@ def remove_from_cart(item_id):
         cart[item_id] -= 1
         if cart[item_id] == 0:
             del cart[item_id]
+<<<<<<< HEAD
         session['shoppingcart'] = cart
+=======
+        session['cart'] = cart
+>>>>>>> 5c6bd4863457c67a4a89fe3912632838b05a0cff
         flash('Item removed from cart.', 'success')
     else:
         flash('Item not found in cart.', 'danger')
     return redirect(url_for('menu'))
 
+<<<<<<< HEAD
 @app.route('/shoppingcart')
+=======
+@app.route('/cart')
+>>>>>>> 5c6bd4863457c67a4a89fe3912632838b05a0cff
 def show_cart():
     cart = session.get('cart', {})
     cart_items = []
