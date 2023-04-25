@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 
 <html lang="en" dir="ltr">
    <head>
@@ -6,7 +6,11 @@
       <title>Groupie's Pizza Registration</title>
       <link rel="stylesheet" href="/static/css/login.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-   </head>
+   </head> -->
+   
+   {% extends "index.html" %}
+
+   {% block content %}
    <body>
 		<div class="container">
         	<label for="show" class="close-btn fas fa-times" title="close"></label>
@@ -38,4 +42,5 @@
         	</form>
     	</div>
     </body>
+	{% endblock %}
 </html>
