@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{% block title %}Groupie's Pizza{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Groupie's Pizza{% endblock %}</title>
 
-	<!---======css=====-->
-	<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <!---======css=====-->
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
 
-	<!--===box icons link--==-->
-	<link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <!--===box icons link--==-->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
-  <!--===google fonts link--==-->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!--===google fonts link--==-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-	<!--===header--==-->
-	{% include "header.html" %}
+    <!--===header--==-->
+    {% include "header.html" %}
 
-	{% block content %}{% endblock %}
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
 
-	<!--===contact--==-->
-	{% include "footer.html" %}
+    <!--===contact--==-->
+    {% include "footer.html" %}
 
-	<!--===js file link--==-->
-	<script src="/static/js/script.js"></script>
+    <!--===js file link--==-->
+    <script src="/static/js/script.js"></script>
 
 </body>
 </html>

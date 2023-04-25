@@ -1,46 +1,53 @@
-<!--<!DOCTYPE html>
-
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
-   <head>
-      <meta charset="utf-8">
-      <title>Groupie's Pizza Registration</title>
-      <link rel="stylesheet" href="/static/css/login.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-   </head> -->
-   
-   {% extends "index.html" %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Groupie's Pizza Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/1L_dstPt3HV5HzF6Gvk/e3G5mloitIx/1glucI" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+</head>
+{% extends "/base.html"%}
 
-   {% block content %}
-   <body>
-		<div class="container">
-        	<label for="show" class="close-btn fas fa-times" title="close"></label>
-        	<div class="text">
-          		Registration Form
-        	</div>
-        	<form action="Register" method="POST">
-				<div class="data">
-					<label>username</label>
-					<input type="text" required>
-			 	</div>
-			 	<div class="data">
-					<label>password</label>
-					<input type="password" required>
-			 	</div>
-				<div class="data">
-				 	<label>confirm password</label>
-				  	<input type="password" required>
-			    </div>
-			
-			 	<div class="btn">
-					<div class="inner"></div>
-					<button type="submit">Register</button>
-			 	</div>
-			 	<div class="signup-link">
-					Already a member? <a href="login">Login now</a>
-				</div>
-		
-        	</form>
-    	</div>
-    </body>
-	{% endblock %}
+{% block content %}
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card mt-5">
+                    <div class="card-body">
+                        <label for="show" class="close-btn fas fa-times" title="close"></label>
+                        <div class="text">
+                            Registration Form
+                        </div>
+                        <form action="Register" method="POST">
+                            <div class="data mb-3">
+                                <label>username</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="data mb-3">
+                                <label>password</label>
+                                <input type="password" class="form-control" required>
+                            </div>
+                            <div class="data mb-3">
+                                <label>confirm password</label>
+                                <input type="password" class="form-control" required>
+                            </div>
+
+                            <div class="btn">
+                                <div class="inner"></div>
+                                <button type="submit" class="btn btn-primary w-100">Register</button>
+                            </div>
+                            <div class="signup-link mt-3">
+                                Already a member? <a href="login">Login now</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}
 </html>

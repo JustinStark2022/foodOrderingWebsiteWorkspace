@@ -19,10 +19,9 @@ app = Flask(__name__, template_folder='templates')
 app.config['MONGO_URI'] = '***REMOVED***'
 app.secret_key = b'***REMOVED***'
 mongo = PyMongo(app)
-
 db = client.groupies
 coll = db.groupies
-users=db.users
+users = db.users
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -138,6 +137,7 @@ def register():
         confirmPass = request.form.get('confirmpass')
 
         existing_user = users.find_one({'username': username})
+        
         if password != confirmPass:
             flash('Password field must match')
 
