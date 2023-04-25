@@ -1,12 +1,14 @@
 from flask import Flask, flash, redirect, render_template, request, jsonify, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
-#from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from gridfs import GridFS
 from flask import Response
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask import session
+
 
 uri = "mongodb+srv://groupiespizzaadmin:Groupies12345@cluster0.3iw3bwg.mongodb.net/?retryWrites=true&w=majority"
 
@@ -66,20 +68,25 @@ def menu():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    items = db.items.find()
+    return render_template('index.html', items=items)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-        user = load_user(username)
+        user = users.find_one({'username': username})
 
-        if user is not None and password == user.password:
-            login_user(user)
-            return redirect('admin')
+        if user and check_password_hash(user['password'], password):
+            if user['role'] == 'admin':
+                return redirect(url_for('admin'))
+            elif user['role'] == 'customer':
+                return redirect(url_for('dashboard'))  # Redirect to the customer dashboard or a different route
+            else:
+                flash('Invalid role.', 'danger')
         else:
-            flash('Invalid username or password', 'danger')
+            flash('Invalid username or password.', 'danger')
 
     return render_template('login.html')
 
@@ -124,8 +131,49 @@ def image(filename):
     
 @app.route('/register')
 def register():
-    if request.method==('GET'):
-        return render_template('register.html')
+    if request.method == 'POST':
+        username = request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        confirmPass = request.form.get('confirmpass')
+
+        existing_user = users.find_one({'username': username})
+        if password != confirmPass:
+            flash('Password field must match')
+
+        elif existing_user is None & password == confirmPass:
+            hashed_password = generate_password_hash(password)
+            users.insert_one({'username': username, 'email': email, 'password': hashed_password, 'role': 'customer'})
+            flash('Registration successful!', 'success')
+            return redirect(url_for('login'))
+        else:
+            flash('Username already exists.', 'danger')
+
+    return render_template('register.html')
+
+@app.route('/remove_from_cart/<item_id>')
+def remove_from_cart(item_id):
+    cart = session.get('cart', {})
+    if item_id in cart:
+        cart[item_id] -= 1
+        if cart[item_id] == 0:
+            del cart[item_id]
+        session['cart'] = cart
+        flash('Item removed from cart.', 'success')
+    else:
+        flash('Item not found in cart.', 'danger')
+    return redirect(url_for('menu'))
+
+@app.route('/cart')
+def show_cart():
+    cart = session.get('cart', {})
+    cart_items = []
+    for item_id, quantity in cart.items():
+        item = db.items.find_one({'_id': ObjectId(item_id)})
+        if item:
+            cart_items.append({'item': item, 'quantity': quantity})
+    return render_template('cart.html', cart_items=cart_items)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

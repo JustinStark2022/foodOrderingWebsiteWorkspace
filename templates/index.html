@@ -99,149 +99,29 @@
 	</section>
 
 	<!--===menu--==-->
-	<section class="menu" id="menu">
-		<div class="center-text" style="margin-top: 200px;">
-			<strong>Our Menu</strong>
-			<h2>Pizza at its finest</h2>
-		</div>
+	<section class="menu" id="menu"></section>
+	<div class="center-text" style="margin-top: 200px;">
+		<strong>Our Menu</strong>
+		<h2>Pizza at its finest</h2>
+	</div>
+	<div class="menu-content">
+	{% for item in items %} 
+	
+			<div class="row">    
+				<div class="row-img">
+					<img src="{{ url_for('image', filename=item['image']) }}" alt="Item image">
+				</div>	
+				<h5 class="name">{{ item["name"] }}</h5>    
+				<h6 class="price">{{ item["price"] }}</h6>  
+				<button onclick="" type="button" class="btn btn-primary">Add to Cart</button> 
+			</div>  
 
-		<div class="menu-content">
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m1.png">
-				</div>
-				<h5>Pepperoni Cheesy<br> Bread Sticks</h5>
-				<h6>$12.99</h6>
-				<button onclick="" type="button" class="btn btn-primary">Add to Cart</button>
-			</div>
-
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m2.png">
-				</div>
-				<h5>Groupie's Style<br>Supreme Pizza</h5>
-				<h6>$12.99</h6>
-				<button onclick="" type="button" class="btn btn-primary">Add to Cart</button>
-			</div>
-
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m3.png">
-				</div>
-				<h5>Meat Lovers<br>Pazone</h5>
-				<h6>$10.99</h6>
-				<button onclick="" type="button" class="btn btn-primary">Add to Cart</button>
-			</div>
-
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				<button onclick="" type="button" class="btn btn-primary">Add to Cart</button>
-			</div>
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				<button onclick="" type="button" class="btn btn-primary">Add to Cart</button>
-			</div>
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				<button onclick="" type="button" class="btn btn-primary">Add to Cart</button>
-			</div>
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				<button onclick="" type="button" class="btn btn-primary">Add to Cart</button>
-			</div>
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				<button onclick="" type="button" class="btn btn-primary">Add to Cart</button>
-			</div>
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				<button onclick="" type="button" class="btn btn-primary">Add to Cart</button>
-			</div>
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				<button onclick="" type="button" class="btn btn-primary">Add to Cart</button>
-			</div>
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				<button onclick="" type="button" class="btn btn-primary">Add to Cart</button>
-			</div>
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				<button onclick="" type="button" class="btn btn-primary">Add to Cart</button>
-			</div>
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				<button onclick="" type="button" class="btn btn-primary">Add to Cart</button>
-			</div>
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				<button onclick="" type="button" class="btn btn-primary">Add to Cart</button>
-			</div>
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				<button onclick="" type="button" class="btn btn-primary">Add to Cart</button>
-			</div>
-			<div class="row">
-				<div class="row-img">
-					<img src="/static/img/m4.png">
-				</div>
-				<h5>Groupie's Signature<br>Buffalo Wings</h5>
-				<h6>$9.99</h6>
-				<button onclick="" type="button" class="btn btn-primary">Add to Cart</button>
-			</div>
-		</div>
-
-		<div class="menu-btnn">
-			<a href="#" class="btn">More Items</a>
-		</div>
+	{% endfor %}    
+	</div>
+	
+	<div class="menu-btnn">
+		<a href="#" class="btn">More Items</a>
+	</div>
 	</section>
 
 
