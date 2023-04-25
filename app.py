@@ -166,11 +166,9 @@ def register():
         if password != confirmPass:
             flash('Password field must match')
 
-<<<<<<< HEAD
+
         elif existing_user != username & password == confirmPass:
-=======
-        elif existing_user is None & password == confirmPass:
->>>>>>> 5c6bd4863457c67a4a89fe3912632838b05a0cff
+
             hashed_password = generate_password_hash(password)
             users.insert_one({'username': username, 'email': email, 'password': hashed_password, 'role': 'customer'})
             flash('Registration successful!', 'success')
@@ -180,36 +178,6 @@ def register():
 
     return render_template('register.html')
 
-@app.route('/remove_from_cart/<item_id>')
-def remove_from_cart(item_id):
-    cart = session.get('cart', {})
-    if item_id in cart:
-        cart[item_id] -= 1
-        if cart[item_id] == 0:
-            del cart[item_id]
-<<<<<<< HEAD
-        session['shoppingcart'] = cart
-=======
-        session['cart'] = cart
->>>>>>> 5c6bd4863457c67a4a89fe3912632838b05a0cff
-        flash('Item removed from cart.', 'success')
-    else:
-        flash('Item not found in cart.', 'danger')
-    return redirect(url_for('menu'))
-
-<<<<<<< HEAD
-@app.route('/shoppingcart')
-=======
-@app.route('/cart')
->>>>>>> 5c6bd4863457c67a4a89fe3912632838b05a0cff
-def show_cart():
-    cart = session.get('cart', {})
-    cart_items = []
-    for item_id, quantity in cart.items():
-        item = db.items.find_one({'_id': ObjectId(item_id)})
-        if item:
-            cart_items.append({'item': item, 'quantity': quantity})
-    return render_template('cart.html', cart_items=cart_items)
 
 
 if __name__ == '__main__':

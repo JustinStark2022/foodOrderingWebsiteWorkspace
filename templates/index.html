@@ -20,7 +20,7 @@
 
 	<!--===header--==-->
 	<header>
-		<a href="/" class="logo">
+		<a href='/' class="logo">
 			<img src="/static/img/logo.png">
 		</a>
 		
@@ -29,19 +29,19 @@
 		<ul class="navbar">
 			<li>
 
-				<a href="{{ url_for('/') }}">Home</a>
+				<a href="/">Home</a>
 			
 			</li>
 
 			<li>
 				
-				<a href="{{ url_for('about') }}">History of Groupie's Pizza</a>
+				<a href="about">History of Groupie's Pizza</a>
 			
 			</li>
 			
 			<li>
 				
-				<a href="{{ url_for('menu') }}">Menu</a>
+				<a href="menu">Menu</a>
 			
 			</li>
 		</ul>
@@ -57,8 +57,6 @@
 					<button style="padding-left: 10px; padding-right: 10px; margin-left: 20px;">Register</button>
 				</a>
 			</div>	
-		<!--<a href="#"><i class='bx bx-search'></i></a>-->	
-		<!--<a href="#"><i class='bx bxs-bell' ></i></a>-->	
 			<a href="shoppingcart"><i class='bx bxs-cart' ></i></a>
 			<div class="bx bx-menu" id="menu-icon"></div>
 
@@ -78,7 +76,7 @@
 		</div>
 
 		<div class="home-img">
-			<img src="/static/img/hero.png">
+			<img src="static/img/hero.png">
 		</div>
 
 
@@ -86,7 +84,7 @@
 
 	<section style="margin-top: 95px; margin-bottom: -70px;">
 		<div class="center-text" style="width:100%;">
-			<img class="center-text" src="/static/img/spliter.png" >
+			<img class="center-text" src="static/img/spliter.png" >
 		</div>
 	</section>
 
@@ -94,7 +92,7 @@
 	<section class="history" id="history" style="margin-top: 150px;">
 	
 		<div class="history-img">
-			<img src="/static/img/history.png">
+			<img src="static/img/history.png">
 		</div>
 
 		<div class="history-text">
@@ -119,11 +117,12 @@
 		<h2>Pizza at its finest</h2>
 	</div>
 	<div class="menu-content">
+
 	{% for item in items %} 
 	
 			<div class="row">    
 				<div class="row-img">
-					<img src="{{ url_for('image', filename=item['image']) }}" alt="Item image">
+					<img src="static/img/logo.png">
 				</div>	
 				<h5 class="name">{{ item["name"] }}</h5>    
 				<h6 class="price">{{ item["price"] }}</h6>  
@@ -141,7 +140,7 @@
 
 	<section style="margin-bottom: 75px;">
 		<div class="center-text" style="width:100%;">
-			<img class="center-text" src="/static/img/spliter.png" >
+			<img class="center-text" src="static/img/spliter.png" >
 		</div>
 	</section>
 
@@ -150,7 +149,7 @@
 	<!--===contact--==-->
 	<section class="contact" id="contact">
 		<div class="contact-box" style="margin-top: 15px;">
-			<a href="index.html" class="logo">
+			<a href="/" class="logo">
 				<img src="/static/img/logo.png">
 			</a>
 
