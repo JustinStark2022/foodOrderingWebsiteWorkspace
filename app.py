@@ -6,6 +6,7 @@ from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from gridfs import GridFS
 from flask import Response
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
 uri = "***REMOVED***"
 
@@ -20,6 +21,31 @@ mongo = PyMongo(app)
 db = client.groupies
 coll = db.groupies
 users=db.users
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+class User(UserMixin):
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
+        self.active = True
+
+    def get_id(self):
+        return self.username
+
+    @property
+    def is_active(self):
+        return self.active
+    
+@login_manager.user_loader
+def load_user(username):
+    user_data = users.find_one({'username': username})
+    if user_data:
+        return User(username=user_data['username'], password=user_data['password'])
+    else:
+        return None
 
 def item_serializer(item):
     return {
@@ -46,16 +72,19 @@ def login():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-        admin = users.find_one({'username': username})
+        user = load_user(username)
 
-        if admin is not None and password == admin['password']:
+        if user is not None and password == user.password:
+            login_user(user)
             return redirect('admin')
         else:
             flash('Invalid username or password', 'danger')
 
     return render_template('login.html')
 
+
 @app.route('/admin', methods=['GET', 'POST'])
+@login_required
 def admin():
     if request.method == 'GET':
         items = db.items.find()
@@ -77,6 +106,12 @@ def admin():
 
         return render_template('admin.html', items=items)
     
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+    
 @app.route('/image/<filename>')
 def image(filename):
     fs = GridFS(db)
@@ -85,6 +120,10 @@ def image(filename):
         return Response(image.read(), content_type=image.content_type)
     else:
         return "Image not found", 404
+    
+@app.route('/register')
+def register():
+    return render_template('/register.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
