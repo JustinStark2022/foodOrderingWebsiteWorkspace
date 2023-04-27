@@ -10,7 +10,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from flask import session
 import config
 
-
+# These have been added to prevent backend usernamer 
 mongoUsername = config.USERNAME
 mongoPassword = config.PASSWORD
 uri = "mongodb+srv://" + mongoUsername + ":" + mongoPassword + "@cluster0.3iw3bwg.mongodb.net/?retryWrites=true&w=majority"
@@ -20,7 +20,7 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 
 app = Flask(__name__, template_folder='templates')
 app.config['MONGO_URI'] = 'mongodb+srv://' + mongoUsername + ':' + mongoPassword + '@cluster0.3iw3bwg.mongodb.net/?retryWrites=true&w=majority'
-app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+app.secret_key = config.secret_key
 mongo = PyMongo(app)
 
 db = client.groupies
