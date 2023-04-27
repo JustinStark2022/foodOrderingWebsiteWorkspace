@@ -11,15 +11,15 @@ from flask import session
 import config
 
 
-username = config.USERNAME
-password = config.PASSWORD
-uri = "mongodb+srv://" + username + ":" + password + "@cluster0.3iw3bwg.mongodb.net/?retryWrites=true&w=majority"
+mongoUsername = config.USERNAME
+mongoPassword = config.PASSWORD
+uri = "mongodb+srv://" + mongoUsername + ":" + mongoPassword + "@cluster0.3iw3bwg.mongodb.net/?retryWrites=true&w=majority"
 
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
 
 app = Flask(__name__, template_folder='templates')
-app.config['MONGO_URI'] = 'mongodb+srv://' + username + ':' + password + '@cluster0.3iw3bwg.mongodb.net/?retryWrites=true&w=majority'
+app.config['MONGO_URI'] = 'mongodb+srv://' + mongoUsername + ':' + mongoPassword + '@cluster0.3iw3bwg.mongodb.net/?retryWrites=true&w=majority'
 app.secret_key = b'***REMOVED***'
 mongo = PyMongo(app)
 
