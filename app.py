@@ -49,31 +49,6 @@ def load_user(username):
     else:
         return None
 
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = 'login'
-
-class User(UserMixin):
-    def __init__(self, username, password):
-        self.username = username
-        self.password = password
-        self.active = True
-
-    def get_id(self):
-        return self.username
-
-    @property
-    def is_active(self):
-        return self.active
-    
-@login_manager.user_loader
-def load_user(username):
-    user_data = users.find_one({'username': username})
-    if user_data:
-        return User(username=user_data['username'], password=user_data['password'])
-    else:
-        return None
-
 def item_serializer(item):
     return {
         "id": str(item["_id"]),
