@@ -180,6 +180,11 @@ def register():
             return redirect(url_for('login'))
     return render_template('register.html')
 
+@app.route('/shoppingcart')
+def shoppingcart():
+   
+    return render_template('shoppingcart.html')
+
 
 
 
