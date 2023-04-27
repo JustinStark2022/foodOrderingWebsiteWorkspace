@@ -114,6 +114,8 @@ def login():
                 return redirect(next_page or url_for('dashboard'))  # Redirect to the customer dashboard or a different route
             else:
                 flash('Invalid role.', 'danger')
+        else:
+            flash('Invalid username or password.', 'danger')
 
     return render_template('login.html')
 
@@ -165,6 +167,7 @@ def register():
         existing_user = users.find_one({'username': username})
 
         if existing_user is not None:
+            flash('username is already taken!', 'danger')
             return redirect(url_for('register'))
         elif existing_user is None and password == confirmPass:
             hashed_password = generate_password_hash(password)
