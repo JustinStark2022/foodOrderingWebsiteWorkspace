@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
+
 
 <!-- Box icons link -->
 <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -49,7 +49,8 @@
         </div>
     </form>
 </div>
-=======
+
+
 
 <head>
 	<meta charset="utf-8">
@@ -104,4 +105,54 @@
 	
 </html>
 
->>>>>>> justin
+
+<!-- Box icons link -->
+<link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+<!-- Google fonts link -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<div class="container">
+    <div class="text">
+        Registration Form
+    </div>
+    <form action="register" method="POST">
+        <div class="data">
+            <label>username</label>
+            <input type="text" name="username" required>
+        </div>
+        <div class="data">
+            <label>password</label>
+            <input type="password" name="password" required>
+        </div>
+        <div class="data">
+            <label>confirm password</label>
+            <input type="password" name="confirmPass" required>
+        </div>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash-messages text-center">
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+        {% endwith %}
+        
+        <div class="btn">
+            <div class="inner"></div>
+            <button type="submit">Register</button>
+        </div>
+        <div class="signup-link">
+            Already a member? <a href="login">Login now</a>
+        </div>
+    </form>
+</div>
+
+
