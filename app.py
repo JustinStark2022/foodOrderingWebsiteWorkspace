@@ -96,18 +96,22 @@ def index():
     items = db.items.find()
     return render_template('index.html', items=items)
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
+        user = None  # Initialize the user variable here
         user = users.find_one({'username': username})
 
         if user and check_password_hash(user['password'], password):
+            login_user(User(username=user['username'], password=user['password']))
+            next_page = request.args.get('next')  # Get the value of the 'next' parameter
             if user['role'] == 'admin':
-                return redirect(url_for('admin'))
+                return redirect(next_page or url_for('admin'))
             elif user['role'] == 'customer':
-                return redirect(url_for('dashboard'))  # Redirect to the customer dashboard or a different route
+                return redirect(next_page or url_for('dashboard'))  # Redirect to the customer dashboard or a different route
             else:
                 flash('Invalid role.', 'danger')
         else:
@@ -118,7 +122,6 @@ def login():
 
 @app.route('/admin', methods=['GET', 'POST'])
 @login_required
-
 def admin():
     if request.method == 'GET':
         items = db.items.find()
@@ -155,29 +158,29 @@ def image(filename):
     else:
         return "Image not found", 404
     
-@app.route('/register')
+@app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == 'POST':
-        username = request.form.get('username')
-        email = request.form.get('email')
-        password = request.form.get('password')
-        confirmPass = request.form.get('confirmpass')
-
+        username = request.form['username']
+        password = request.form['password']  # Get password from form data
+        confirmPass = request.form['confirmPass']  # Get confirmPass from form data
         existing_user = users.find_one({'username': username})
-        if password != confirmPass:
-            flash('Password field must match')
 
-
-        elif existing_user != username & password == confirmPass:
-
+        if existing_user is not None:
+            flash('username is already taken!', 'danger')
+            return redirect(url_for('register'))
+        elif existing_user is None and password == confirmPass:
             hashed_password = generate_password_hash(password)
-            users.insert_one({'username': username, 'email': email, 'password': hashed_password, 'role': 'customer'})
-            flash('Registration successful!', 'success')
+            new_user = {
+                'username': username,
+                'password': hashed_password,
+                'role': 'customer'  # Assuming a default role of 'customer'
+            }
+            users.insert_one(new_user)
             return redirect(url_for('login'))
-        else:
-            flash('Username already exists.', 'danger')
-
     return render_template('register.html')
+
+
 
 
 
