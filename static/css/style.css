@@ -7,15 +7,14 @@
 	list-style: none;
 	scroll-behavior: smooth;
 }
-
 :root{
+
 	--main-color: #f24f04;
 	--text-color: #252429;
 	--bg-color: #fffefb;
 	--rr-color: #ffa50a;
 	--other-color: #95949a;
 	--bb-color: #fff2de;
-
 	--big-font: 4.4rem;
 	--h2-font: 3rem;
 	--p-font: 1rem;
