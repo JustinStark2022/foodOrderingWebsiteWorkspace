@@ -10,9 +10,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from flask import session
 import config
 
-# These have been added to prevent backend secrets from being shared on public git repo. 
-mongoUsername = config.USERNAME
-mongoPassword = config.PASSWORD
+# Added to prevent backend secrets from being shared on public git repo. Requires a config.py file with connection string inside as a variable  "uri" 
 uri = config.uri
 
 # Create a new client and connect to the server
