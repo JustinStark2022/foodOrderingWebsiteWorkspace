@@ -11,7 +11,7 @@
 :root{
 	--main-color: #f24f04;
 	--text-color: #252429;
-	--bg-color: #fffefb;
+	--bg-color: #fbfdff;
 	--rr-color: #ffa50a;
 	--other-color: #95949a;
 	--bb-color: #000000;
@@ -72,7 +72,7 @@ form .data input{
   border: 1px solid silver;
 }
 form .data input:focus{
-  border-color: #3498db;
+  border-color: #94c9ec;
   border-bottom-width: 2px;
 }
 form .btn{
@@ -100,7 +100,7 @@ form .btn button{
   width: 100%;
   background: none;
   border: none;
-  color: #fff;
+  color: #ffffff;
   font-size: 18px;
   font-weight: 500;
   text-transform: uppercase;
