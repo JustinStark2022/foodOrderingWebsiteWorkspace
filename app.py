@@ -10,16 +10,16 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from flask import session
 import config
 
-# These have been added to prevent backend usernamer 
+# These have been added to prevent backend secrets from being shared on public git repo. 
 mongoUsername = config.USERNAME
 mongoPassword = config.PASSWORD
-uri = "mongodb+srv://" + mongoUsername + ":" + mongoPassword + "@cluster0.3iw3bwg.mongodb.net/?retryWrites=true&w=majority"
+uri = config.uri
 
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
 
 app = Flask(__name__, template_folder='templates')
-app.config['MONGO_URI'] = 'mongodb+srv://' + mongoUsername + ':' + mongoPassword + '@cluster0.3iw3bwg.mongodb.net/?retryWrites=true&w=majority'
+app.config['MONGO_URI'] = uri
 app.secret_key = config.secret_key
 mongo = PyMongo(app)
 
