@@ -8,15 +8,18 @@ from gridfs import GridFS
 from flask import Response
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask import session
+import config
 
 
-uri = "***REMOVED***"
+username = config.USERNAME
+password = config.PASSWORD
+uri = "mongodb+srv://" + username + ":" + password + "@cluster0.3iw3bwg.mongodb.net/?retryWrites=true&w=majority"
 
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
 
 app = Flask(__name__, template_folder='templates')
-app.config['MONGO_URI'] = '***REMOVED***'
+app.config['MONGO_URI'] = 'mongodb+srv://' + username + ':' + password + '@cluster0.3iw3bwg.mongodb.net/?retryWrites=true&w=majority'
 app.secret_key = b'***REMOVED***'
 mongo = PyMongo(app)
 
