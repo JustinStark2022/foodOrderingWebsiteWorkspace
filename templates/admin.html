@@ -11,7 +11,7 @@
 	<!--===box icons link--==-->
 	<link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
-  <!--===google fonts link--==-->
+    <!--===google fonts link--==-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -19,58 +19,70 @@
 <body>
 <!--===header--==-->
 <header>
+
 	<a href="/" class="logo" style="margin-left: 75px;">
+
 		<img src="/static/img/logo.png">
+
 	</a>
 	
-	
-
 	<ul class="navbar">
+
 		<li><a href="menu">Menu</a></li>
+
 	</ul>
 	
 	<div class="header-icons">
+
 		<div>
 			<a href="{{ url_for('logout') }}">
 				<button style="padding-left: 10px; padding-right: 10px;">Logout</button>
 			</a>
 		</div>	
-		
-	
+			
 		<!----darkmode-->
 		<div class="bx bx-moon" id="darkmode"></div>
+
 	</div>
+
 </header>
+
 	<fieldset style="margin-top: 200px;">
+
 		<legend>Add Menu Item Form</legend>
+
 		<form action="/admin" method="post" name="first_form" enctype="multipart/form-data" onsubmit="validation()">
 			<p><label for="newName">Item Name:</label><input type="text" name="newName" maxlength="50"  class="input"/></p>
 			<p><label for="newPrice">Item Price:</label><input type="number" name="newPrice" maxlength="10"  class="input"/></p>
 			<p><label for="newImage">Item Picture:</label><input type="file" name="newImage" class="input"/></p>
 			<p><input type="submit" value="Submit" class="submit"/></p>
 		</form>
+
 	</fieldset>
+
 	<!--===menu--==-->
 	<section class="menu" id="menu"></section>
-	<div class="center-text" style="margin-top: 200px;">
-		<strong>Our Menu</strong>
-		<h2>Pizza at its finest</h2>
-	</div>
-	<div class="menu-content">
-	{% for item in items %} 
-	
-		
-			<div class="row">    
-				<div class="row-img">
-					<img src="{{ url_for('image', filename=item['image']) }}" alt="Item image">
-				</div>	
-				<h5 class="name">{{ item["name"] }}</h5>    
-				<h6 class="price">{{ item["price"] }}</h6>  
-				<button onclick="" type="button" class="btn btn-primary">Add to Cart</button> 
-			</div>  
 
-			
+	<div class="center-text" style="margin-top: 200px;">
+
+		<strong>Our Menu</strong>
+
+		<h2>Pizza at its finest</h2>
+
+	</div>
+
+	<div class="menu-content">
+
+	{% for item in items %} 
 		
+		<div class="row">    
+			<div class="row-img">
+				<img src="{{ url_for('image', filename=item['image']) }}" alt="Item image">
+			</div>	
+			<h5 class="name">{{ item["name"] }}</h5>    
+			<h6 class="price">{{ item["price"] }}</h6>  
+			<button onclick="" type="button" class="btn btn-primary">Add to Cart</button> 
+		</div>  
 
 	{% endfor %}    
 </div>
