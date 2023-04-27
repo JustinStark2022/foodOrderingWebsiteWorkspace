@@ -9,6 +9,8 @@
    <body>
 
 
+      <div class="container">
+
       <a href='/' class="logo-top" >
          <img src="/static/img/logo.png">
       </a> 
@@ -20,10 +22,36 @@
 
       <div class="container">
 
+
         <div class="text">
            Groupie's <br> Online Ordering Family Login 
         </div>
         <form action="/login" method="POST">
+
+         <div class="data">
+             <label>username</label>
+             <input for="username" type="text" name="username" required>
+         </div>
+         <div class="data">
+             <label>password</label>
+             <input type="password" name="password" required>
+         </div>
+         
+         <div class="flash-messages-container">
+         {% with messages = get_flashed_messages(with_categories=true) %}
+             {% if messages %}
+                 {% for category, message in messages %}
+                 <div class="alert alert-{{ category }}">{{ message }}</div>
+                 {% endfor %}
+             {% endif %}
+         {% endwith %}
+         </div>
+         
+         <div class="btn">
+             <div class="inner"></div>
+             <button type="submit">login</button>
+         </div>
+
 
 
            <div class="data">
@@ -65,6 +93,7 @@
              <div class="inner"></div>
              <button type="submit">login</button>
          </div>
+
 
            <div class="signup-link">
               Not a member? <a href="register">Signup now</a>
