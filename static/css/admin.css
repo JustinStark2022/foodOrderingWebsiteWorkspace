@@ -1,4 +1,4 @@
-{
+*{
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
@@ -9,13 +9,13 @@
 }
 
 :root{
+
 	--main-color: #f24f04;
 	--text-color: #252429;
 	--bg-color: #fffefb;
 	--rr-color: #ffa50a;
 	--other-color: #95949a;
 	--bb-color: #fff2de;
-
 	--big-font: 4.4rem;
 	--h2-font: 3rem;
 	--p-font: 1rem;
@@ -38,10 +38,22 @@ header{
 	padding: 15px 14%;
 	transition: all ease .52s;
 }
+.greet-user{
+
+	margin-right:auto;
+	margin-left: 15px ;
+
+}
+.greet-user h4{
+
+	text-align: left;
+
+}
 .logo img{
 	width: 120px;
 	max-width: 100%;
 	height: auto;
+	margin-right: -15px;
 }
 .navbar{
 	display: flex;
@@ -261,12 +273,12 @@ section{
 .menu-content{
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(250px, auto));
-	gap: 2.5rem;
+	gap: 2.2rem;
 	align-items: center;
 	text-align: center;
 	margin-top: 4rem;
-	margin-left: 20px;
-	margin-right: 20px;
+	margin-left: 100px;
+	margin-right: 100px;
 }
 .row{
 	display: flex;
@@ -566,4 +578,27 @@ color: #fff;
 background: #ffa20c;
 border: 1px solid #781351;
 padding: 2px 6px
+}
+
+body > fieldset > form > p:nth-child(1) > input, body > fieldset > form > p:nth-child(2) > input, body > fieldset > form > p:nth-child(3) > input{
+	background-color: #fff;
+}
+body > fieldset > form > p:nth-child(4) > input, body > fieldset > legend{
+
+	background-color: #f24f04; ;
+    color:  #fff;
+
+}
+body > fieldset > form > p:nth-child(4) > input{
+
+	margin-left: 50px;
+	margin-top:  30px;
+	margin-bottom: 15px;
+
+}
+
+body > fieldset > form{
+
+	margin-top: 20px;
+
 }
