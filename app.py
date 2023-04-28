@@ -99,9 +99,11 @@ def login():
 @app.route('/admin', methods=['GET', 'POST'])
 @login_required
 def admin():
-    if request.method == 'GET':
+    username=current_user.username
+
+    if request.method == 'GET':        
         items = db.items.find()
-        return render_template('admin.html', items=items)
+        return render_template('admin.html', items=items, username=username)
     
     if request.method == 'POST':
         items = db.items.find()
