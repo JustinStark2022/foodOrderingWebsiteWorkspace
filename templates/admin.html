@@ -3,6 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="csrf-token" content="{{ csrf_token }}">
+
 	<title>Groupie's Pizza</title>
 
 	<!---======css=====-->
@@ -35,10 +37,12 @@
 	<div class="header-icons">
 
 		<div>
+			<span>{{ username }}</span>
 			<a href="{{ url_for('logout') }}">
 				<button style="padding-left: 10px; padding-right: 10px;">Logout</button>
 			</a>
-		</div>	
+		</div>
+			  
 			
 		<!----darkmode-->
 		<div class="bx bx-moon" id="darkmode"></div>
@@ -52,8 +56,9 @@
 		<legend>Add Menu Item Form</legend>
 
 		<form action="/admin" method="post" name="first_form" enctype="multipart/form-data" onsubmit="validation()">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 			<p><label for="newName">Item Name:</label><input type="text" name="newName" maxlength="50"  class="input"/></p>
-			<p><label for="newPrice">Item Price:</label><input type="number" name="newPrice" maxlength="10"  class="input"/></p>
+			<p><label for="newPrice">Item Price:</label><input type="number" name="newPrice" min="0" step="0.01" maxlength="10" class="input" /></p>
 			<p><label for="newImage">Item Picture:</label><input type="file" name="newImage" class="input"/></p>
 			<p><input type="submit" value="Submit" class="submit"/></p>
 		</form>
