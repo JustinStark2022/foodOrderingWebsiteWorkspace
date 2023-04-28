@@ -19,36 +19,35 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
+
 <!--===header--==-->
 <header>
 
-	<a href="/" class="logo" style="margin-left: 75px;">
-
+	<a href='/' class="logo">
 		<img src="/static/img/logo.png">
-
 	</a>
 	
-	<ul class="navbar">
+	<div class="greet-user" style="margin-top: -30px;">
+        <div>
+		    <h4 style="justify-content: left; display: inline-block;" >Welcome</h4> <h4 style="font-weight: 200; display: inline-block;">{{ username }}</h4> 
+	    </div>
+	</div>
 
-		<li><a href="menu">Menu</a></li>
-
-	</ul>
-	
 	<div class="header-icons">
 
 		<div>
 			<span>{{ username }}</span>
 			<a href="{{ url_for('logout') }}">
+
 				<button style="padding-left: 10px; padding-right: 10px;">Logout</button>
+
 			</a>
 		</div>
 			  
 			
 		<!----darkmode-->
 		<div class="bx bx-moon" id="darkmode"></div>
-
 	</div>
-
 </header>
 
 	<fieldset style="margin-top: 200px;">
@@ -59,8 +58,9 @@
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 			<p><label for="newName">Item Name:</label><input type="text" name="newName" maxlength="50"  class="input"/></p>
 			<p><label for="newPrice">Item Price:</label><input type="number" name="newPrice" min="0" step="0.01" maxlength="10" class="input" /></p>
+			<p><label for="newPrice">Item Price:</label><input type="number" name="newPrice" min="0" step="0.01" maxlength="10" class="input" /></p>
 			<p><label for="newImage">Item Picture:</label><input type="file" name="newImage" class="input"/></p>
-			<p><input type="submit" value="Submit" class="submit"/></p>
+			<p><input type="submit" value="Add Item" class="btn btn-primary" /></p>
 		</form>
 
 	</fieldset>

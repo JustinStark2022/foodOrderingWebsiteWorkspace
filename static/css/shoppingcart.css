@@ -8,17 +8,18 @@
 	scroll-behavior: smooth;
 }
 :root{
+
 	--main-color: #f24f04;
 	--text-color: #252429;
 	--bg-color: #fffefb;
 	--rr-color: #ffa50a;
 	--other-color: #95949a;
 	--bb-color: #fff2de;
-
 	--big-font: 4.4rem;
 	--h2-font: 3rem;
 	--p-font: 1rem;
 }
+
 header{
 	position: fixed;
 	top: 0;
@@ -30,13 +31,25 @@ header{
 	justify-content: space-between;
 	background: var(--bg-color);
 	box-shadow: 0 0.4rem 30rem rgba(0, 0, 0, 0.1);
-	padding: 15px 14%;
+	padding: 15px 4%;
 	transition: all ease .52s;
 }
 .logo img{
 	width: 120px;
 	max-width: 100%;
 	height: auto;
+	margin-right: -15px;
+}
+.greet-user{
+
+	margin-right: auto;
+	margin-left: 15px ;
+
+}
+.greet-user h4{
+
+	text-align: left;
+
 }
 .navbar{
 	display: flex;
@@ -76,14 +89,16 @@ header{
 }
 .header-icons{
 	display: flex;
-	align-items: center;
+	align-items: right;
 	justify-content: center;
+	
 }
 .header-icons i{
 	vertical-align: middle;
 	font-size: 1.5rem;
 	color: var(--text-color);
 	margin-left: 20px;
+	margin-
 	transition: all ease.50s;
 }
 .header-icons i:hover{
@@ -236,5 +251,15 @@ body{
 	.wrapper {
 		max-width: 95%;
 	}
+}
+#darkmode{
+	font-size: 25px;
+	margin-left: 20px;
+	cursor: pointer;
+}
+body.dark{
+	--text-color: #fff;
+	--bg-color: #1f1f1f;
+	--bb-color: #0e0e0e;
 }
 

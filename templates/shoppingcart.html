@@ -19,17 +19,43 @@
 	<body>
 		<!--===header--==-->
 		<header>
-			<a href="/" class="logo">
+			<a href="/" class="logo" style="margin-right: auto;">
 				<img src="/static/img/logo.png">
 			</a>
+
+			<div class="greet-user" style="margin-top: -30px; margin-left: -175px;">
+				<div>
+					<h4>Welcome</h4> <h4 style="font-weight: 200; display: inline-block;">{{ username }}</h4> 
+				</div>
+			</div>
+			
 			<ul class="navbar">
 				<li><a href="/" class="active">Home</a></li>
 				<li><a href="about">History of Groupie's Pizza</a></li>
 				<li><a href="menu">Menu</a></li>
 			</ul>
-			<div class="header-icons">
+			
+			<div class="header-icons" style="margin-left: auto; justify-content: right;">
+
+				<div>
+					
+					<a href="{{ url_for('logout') }}">
+		
+						<button style="padding-left: 10px; padding-right: 10px; justify-content: left;">Logout</button>
+		
+					</a>
+		
+				</div>
+		
 				<a href="shoppingcart"><i class='bx bxs-cart' ></i></a>
+				
+	
+				<!----darkmode-->
+				<div class="bx bx-moon" id="darkmode"></div>
 			</div>
+			
+
+			
 		</header>
 		<!--===shoppingcart--==-->
     	<div class="wrapper" style="margin-top: 250px;">
