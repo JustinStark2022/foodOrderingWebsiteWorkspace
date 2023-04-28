@@ -3,6 +3,8 @@
 
 	<head>
 		<meta charset="UTF-8">
+		<meta name="csrf-token" content="{{ csrf_token() }}">
+
     	<title>Groupie's Pizza Shopping Cart</title>
     	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 		<link href="/static/css/shoppingcart.css" rel="stylesheet">
@@ -35,15 +37,24 @@
 			<div class="project">
 				<div class="shop">
 					
+					{% for item in items %}
 					<div class="cart-box">
-				    	<img src="/static/img/m1.png">
+						<img src="{{ url_for('image', filename=item['image']) }}" alt="Item image">
 						<div class="content">
-							<h3>Pepperoni Cheesy<br> Bread Sticks</h3>
-							<h4>Price: $12.99</h4>
-							<p class="unit">Quantity: <input name="" value="2"></p>
-							<p class="btn-area"><i aria-hidden="true" class="fa fa-trash"></i> <span class="btn2">Remove</span></p>
+							<h3>{{ item["name"] }}</h3>
+							<h4>Price: ${{ item["price"] }}</h4>
+							<form method="POST" action="{{ url_for('shoppingcart') }}">
+								<p class="unit">Quantity: <input name="quantity" value="1"></p>
+								<input type="hidden" name="action" value="remove">
+								<input type="hidden" name="item_id" value="{{ item['_id'] }}">
+								<p class="btn-area">
+									<i aria-hidden="true" class="fa fa-trash"></i>
+									<button type="submit" class="btn2">Remove</button>
+								</p>
+							</form>
 						</div>
 					</div>
+					{% endfor %}
 					
 				</div>
 				<div class="right-bar">

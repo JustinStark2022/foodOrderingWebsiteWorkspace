@@ -2,6 +2,8 @@
 <html lang="en" dir="ltr">
    <head>
       <meta charset="utf-8">
+      <meta name="csrf-token" content="{{ csrf_token }}">
+
       <title>Groupie's Pizza Login</title>
       <link rel="stylesheet" href="/static/css/login.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
@@ -36,7 +38,7 @@
              <label>password</label>
              <input type="password" name="password" required>
          </div>
-         
+         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
          <div class="flash-messages-container">
          {% with messages = get_flashed_messages(with_categories=true) %}
              {% if messages %}

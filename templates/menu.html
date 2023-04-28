@@ -3,6 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+
 	<title>Groupie's Pizza</title>
 
 	<!---======css=====-->
@@ -58,11 +60,11 @@
 				</div>	
 				<h5 class="name">{{ item["name"] }}</h5>    
 				<h6 class="price">{{ item["price"] }}</h6>  
-				<button onclick="" type="button" class="btn btn-primary">Add to Cart</button> 
+				<button data-item-id="{{ item['_id'] }}" type="button" class="btn btn-primary add-to-cart">Add to Cart</button> 
 			</div>  
 
 	{% endfor %}    
-</div>
+	</div>
 </section>
 
     <!--===contact--==-->
