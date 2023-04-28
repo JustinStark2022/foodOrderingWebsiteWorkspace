@@ -23,20 +23,45 @@ darkmode.onclick = () => {
 	}
 }
 
-async function fetchItems() {
-	const response = await fetch('/items');
-	const items = await response.json();
-	// Render items in the frontend
-  }
-  
-  async function addItem(name) {
-	const response = await fetch('/items', {
+document.addEventListener('DOMContentLoaded', () => {
+  const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+  addToCartButtons.forEach((button) => {
+    button.addEventListener('click', async () => {
+      const itemId = button.getAttribute('data-item-id');
+      await addToCart(itemId);
+    });
+  });
+});
+
+async function addToCart(itemId) {
+	const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+	const response = await fetch('/add_to_cart', {
 	  method: 'POST',
 	  headers: {
 		'Content-Type': 'application/json',
+		'X-CSRFToken': csrfToken,
 	  },
-	  body: JSON.stringify({name: name}),
+	  body: JSON.stringify({ item_id: itemId }),
 	});
-	const newItem = await response.json();
-	// Update the frontend with the new item
+  
+	if (response.ok) {
+	  // Show a success message or update the cart count
+	  alert('Item added to cart!');
+	} else {
+	  // Log the raw response text to the console
+	  const rawText = await response.text();
+	  console.log('Raw response text:', rawText);
+  
+	  // Show an error message
+	  try {
+		const error = JSON.parse(rawText); // Change this line
+		console.error(error);
+	  } catch (e) {
+		console.error('Error parsing JSON:', e);
+	  }
+  
+	  alert('Error adding item to cart.');
+	}
   }
+  
