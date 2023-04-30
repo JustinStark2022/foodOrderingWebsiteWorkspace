@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.11.3-alpine3.16
+FROM python:3.11.3
 
 # Set the working directory to /app
 WORKDIR /app
@@ -8,10 +8,6 @@ WORKDIR /app
 COPY *.py ./
 COPY requirements.txt .
 
-# Copy the templates and static folders
-COPY templates/ templates/
-COPY static/ static/
-
 # Install any needed packages specified in requirements.txt
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
@@ -19,6 +15,9 @@ RUN pip install --trusted-host pypi.python.org -r requirements.txt
 ENV FLASK_APP=app.py
 ENV FLASK_ENV=development
 ENV FLASK_RUN_HOST=0.0.0.0
+
+# Run app.py when the container launches
+CMD ["python", "-m", "flask", "run", "--host=0.0.0.0"]
 
 # Run app.py when the container launches
 CMD ["python", "-m", "flask", "run", "--host=0.0.0.0"]
