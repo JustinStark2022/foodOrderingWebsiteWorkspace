@@ -114,10 +114,8 @@ def login():
 def admin():
     username=current_user.username
 
-
     if request.method == 'GET':
         items = db.items.find()
-        return render_template('admin.html', items=items, username=username)
         return render_template('admin.html', items=items, username=username)
     
     if request.method == 'POST':
@@ -208,7 +206,6 @@ def shoppingcart():
     return render_template('shoppingcart.html', items=items)
 
 
-
 @app.route('/add_to_cart', methods=['POST'])
 @login_required
 def add_to_cart():
@@ -244,9 +241,6 @@ def add_to_cart():
         )
 
     return jsonify({'message': 'Item added to cart successfully'}), 200
-
-
-
 
 
 if __name__ == '__main__':

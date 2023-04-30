@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+      - ./templates:/app/templates
+      - ./static:/app/static
+    environment:
+      FLASK_APP: app.py
+      FLASK_ENV: development
+      FLASK_RUN_HOST: 0.0.0.0
+    command: ["python", "-m", "flask", "run", "--host=0.0.0.0", "--no-reload"]
