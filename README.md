@@ -52,7 +52,7 @@ Justin Stark https://github.com/JustinStark2022 \
 Mark Whiteside https://github.com/sr71shark \
 Mike Thurig -  https://github.com/ekimt27 \
 Heather Werner \
-Daniela Pirrera \
+Daniela Pirrera 
 
 <!-- List your collaborators, if any, with links to their GitHub profiles.
 
