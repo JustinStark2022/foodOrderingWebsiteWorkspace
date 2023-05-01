@@ -245,6 +245,10 @@ def add_to_cart():
 
     return jsonify({'message': 'Item added to cart successfully'}), 200
 
+@app.route('/checkout')
+def checkout():
+    return render_template('checkout.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
