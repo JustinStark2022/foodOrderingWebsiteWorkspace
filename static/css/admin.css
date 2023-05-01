@@ -585,7 +585,7 @@ body > fieldset > form > p:nth-child(1) > input, body > fieldset > form > p:nth-
 }
 body > fieldset > form > p:nth-child(4) > input, body > fieldset > legend{
 
-	background-color: #f24f04; ;
+	background-color: #f24f04; 
     color:  #fff;
 
 }
@@ -600,5 +600,10 @@ body > fieldset > form > p:nth-child(4) > input{
 body > fieldset > form{
 
 	margin-top: 20px;
+
+}
+body > section:nth-child(2) > fieldset > legend{
+
+	background-color: #f24f04;
 
 }
