@@ -175,6 +175,48 @@ section{
 }
 .btn2 span i:hover{
 	transform: scale(1.1) translateX(-5px);
+
+}
+.center-about-text{
+	
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	align-items: center;
+	gap: 1.8rem;
+	margin-right: 25px;
+
+}
+
+.center-about-text div{
+	text-align: center;
+	padding-left: 25px;
+	padding-right: 45px;
+}
+
+.center-about-text strong{
+	text-align: center;
+	font-weight: 500;
+	color: var(--main-color);
+	font-size: var(--p-font);
+}
+
+.center-about-text h2{
+	font-family: 'Playfair Display', serif;
+	text-align: center;
+	font-weight: 900;
+}
+
+.center-about-text p{
+	font-weight: 400;
+	font-family: 'Poppins', sans-serif;
+	text-align: left;
+	padding-top: 20px;
+	padding-left: 25px;
+	padding-right: 25px;
+	
+	
+	
+	font-size: .9em;
 }
 
 .center-text{
@@ -186,6 +228,11 @@ section{
 	color: var(--main-color);
 }
 .center-text h2{
+	font-family: 'Playfair Display', serif;
+	font-size: var(--h2-font);
+	font-weight: 900;
+}
+.center-text p{
 	font-family: 'Playfair Display', serif;
 	font-size: var(--h2-font);
 	font-weight: 900;
@@ -236,6 +283,13 @@ section{
 	height: auto;
 	width: 100%;
 }
+
+.about-img img{
+	height: auto;
+	width: 100%;
+
+}
+
 .history-text strong{
 	/*font-size: var(--p-font);*/
 	font-size: 24px;
@@ -264,6 +318,8 @@ section{
 	align-items: center;
 	text-align: center;
 	margin-top: 4rem;
+	margin-left: 100px;
+	margin-right: 100px;
 }
 .row{
 	display: flex;
