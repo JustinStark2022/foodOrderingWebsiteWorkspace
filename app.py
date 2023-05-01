@@ -119,6 +119,8 @@ def admin():
         return render_template('admin.html', items=items, username=username)
         
     
+        
+    
     if request.method == 'POST':
         items = db.items.find()
         newName = request.form.get('newName')
