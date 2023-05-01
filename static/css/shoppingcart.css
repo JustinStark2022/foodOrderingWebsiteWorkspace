@@ -53,6 +53,7 @@ header{
 }
 .navbar{
 	display: flex;
+	margin-right: 250px;
 }
 .navbar a{
 	position: relative;
@@ -89,18 +90,17 @@ header{
 }
 .header-icons{
 	display: flex;
-	align-items: right;
+	align-items: center;
 	justify-content: center;
-	
 }
 .header-icons i{
 	vertical-align: middle;
 	font-size: 1.5rem;
 	color: var(--text-color);
 	margin-left: 20px;
-	margin-
 	transition: all ease.50s;
 }
+
 .header-icons i:hover{
 	transform: scale(1.1) translateX(-5px);
 	color: var(--main-color);
@@ -252,6 +252,8 @@ body{
 		max-width: 95%;
 	}
 }
+
+
 #darkmode{
 	font-size: 25px;
 	margin-left: 20px;
