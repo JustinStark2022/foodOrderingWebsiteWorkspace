@@ -9,6 +9,7 @@ services:
       - .:/app
       - ./templates:/app/templates
       - ./static:/app/static
+      - ./logs:/app/logs  # Add this line to mount the logs directory
     environment:
       FLASK_APP: app.py
       FLASK_ENV: development
