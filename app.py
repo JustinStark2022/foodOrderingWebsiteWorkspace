@@ -333,6 +333,10 @@ def remove_from_cart():
     # Add logic to remove the item with item_id from the user's cart in the database.
     return redirect(url_for('shopping_cart'))
 
+@app.route('/checkout')
+def checkout():
+    return render_template('checkout.html')
+
 
 if __name__ == "__main__":
     app.run(debug=True)
