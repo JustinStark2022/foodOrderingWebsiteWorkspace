@@ -43,22 +43,19 @@
 			</a>
 		</div>
 			  
-			
-		<!----darkmode-->
-		<div class="bx bx-moon" id="darkmode"></div>
 	</div>
 </header>
 	<section>
 		<fieldset style="margin-top: 200px;">
 
-			<legend>Add Menu Item Form</legend>
+			<legend style="background-color: #f24f04;">Add Menu Item Form</legend>
 
 			<form style="margin: 20px;" action="/admin" method="post" name="first_form" enctype="multipart/form-data" onsubmit="validation()">
 				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 				<p style=" padding-top: 5px;"><label for="newName">Item Name:</label><input type="text" name="newName" maxlength="50"  class="input"/></p>
 				<p><label for="newPrice">Item Price:</label><input type="number" name="newPrice" min="0" step="0.01" maxlength="10" class="input" /></p>
 				<p><label for="newImage">Item Picture:</label><input style="margin-top: -20px;" type="file" name="newImage" class="input"/></p>
-				<p style="margin-top: 15px;"><input type="submit" value="Add Item" class="btn btn-primary" /></p>
+				<p style="margin-top: 15px;"><input type="submit" value="Add Item" class="btn btn-primary"  /></p>
 			</form>
 
 		</fieldset>
