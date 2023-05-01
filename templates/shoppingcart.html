@@ -35,20 +35,15 @@
 				<li><a href="menu">Menu</a></li>
 			</ul>
 			
-			<div class="header-icons" style="margin-left: auto; justify-content: right;">
-
-				<div>
+			<div class="header-icons">
 					
-					<a href="{{ url_for('logout') }}">
-		
-						<button style="padding-left: 10px; padding-right: 10px; justify-content: left;">Logout</button>
-		
+				<div>
+					<a href="{{ url_for('logout') }}"  >
+						<button style="padding-left: 10px; padding-right: 10px; margin-left: 20px;">Log Out</button>
 					</a>
-		
-				</div>
-		
-				<a href="shoppingcart"><i class='bx bxs-cart' ></i></a>
-				
+				</div>	
+				<a href="shoppingcart"> <i class='bx bxs-cart' ></i></a>
+				<div style="display: none;" class="bx bx-menu" id="menu-icon"></div>
 	
 				<!----darkmode-->
 				<div class="bx bx-moon" id="darkmode"></div>
