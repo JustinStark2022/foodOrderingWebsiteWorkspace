@@ -19,7 +19,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
-
 	<!--===header--==-->
 	<header>
 		<a href='/' class="logo">
@@ -99,9 +98,8 @@
 
 		<div class="history-text">
 			<strong>History of Groupie's Pizza</strong>
-			<h2>Best Pizza Since 1987</h2>
+			<h2>Est 1955</h2>
 			<p>We promise our signature pizza sauce and fresh handtossed dough will have you ordering again and again</p>
-
 			<a href="about" class="btn">Learn More</a>
 		</div>
 	</section>
@@ -123,7 +121,7 @@
 	{% for item in items %} 
 		<div class="row">    
 		  <div class="row-img">
-			<img src="static/img/logo.png">
+			<img src="{{ url_for('image', filename=item['image']) }}" alt="Item image">
 		  </div>	
 		  <h5 class="name">{{ item["name"] }}</h5>    
 		  <h6 class="price">{{ item["price"] }}</h6>  

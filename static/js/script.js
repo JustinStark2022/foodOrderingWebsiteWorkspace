@@ -1,10 +1,13 @@
 let menu = document.querySelector('#menu-icon');
 let navbar = document.querySelector('.navbar');
 
-menu.onclick = () => {
-	menu.classList.toggle('bx-x');
-	navbar.classList.toggle('open');
-};
+if (menu) {
+    menu.onclick = () => {
+        menu.classList.toggle('bx-x');
+        navbar.classList.toggle('open');
+    };
+}
+
 
 window.onscroll = () => {
 	menu.classList.remove('bx-x');
@@ -35,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function addToCart(itemId) {
+    console.log("Item ID to add:", itemId);
 	const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 	const response = await fetch('/add_to_cart', {
 	  method: 'POST',
