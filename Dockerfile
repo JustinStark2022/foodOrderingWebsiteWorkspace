@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.11.3-alpine3.16
+FROM python:3.11.3
 
 # Set the working directory to /app
 WORKDIR /app
@@ -7,10 +7,6 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY *.py ./
 COPY requirements.txt .
-
-# Copy the templates and static folders
-COPY templates/ templates/
-COPY static/ static/
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
