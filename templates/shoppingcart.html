@@ -55,17 +55,16 @@
 					{% if items|length > 0 %}
 					{% for item in items %}
 					<div class="cart-box">
-						<img src="{{ url_for('image', filename=item['image']) }}" alt="Item image">
+						<button onclick="deleteItem('{{ item._id }}')" class="delete-btn">X</button>
+						<img src="{{ url_for('image', filename=item.image) }}" alt="Item image">
 						<div class="content">
-							<h3>{{ item["name"] }}</h3>
-							<h4>Price: ${{ item["price"] }}</h4>
-							<p class="unit">Quantity: <span>{{ item['quantity'] }}</span></p>
-							<input type="hidden" name="item_id" value="{{ item['_id'] }}">
-							<p class="btn-area">
-								<button onclick="decrementQuantity('{{ item['_id'] }}', {{ item['quantity'] }})" class="btn2">-</button>
-								<button onclick="incrementQuantity('{{ item['_id'] }}', {{ item['quantity'] }})" class="btn2">+</button>
-								<i aria-hidden="true" class="fa fa-trash"></i>
-								<!-- <button onclick="updateCart('delete', '{{ item['_id'] }}', 0)" class="btn2">Remove</button> -->
+							<h3>{{ item.name }}</h3>
+							<h4>Price: ${{ item.price }}</h4>
+							<p class="unit">Quantity: <span>{{ item.quantity }}</span></p>
+							<input type="hidden" name="item_id" value="{{ item._id }}">							<p class="btn-area">
+								<button onclick="decrementQuantity('{{ item._id }}')" class="btn2">-</button>
+								<button onclick="incrementQuantity('{{ item._id }}')" class="btn2">+</button>
+								<!-- <i aria-hidden="true" class="fa fa-trash"></i> -->
 							</p>
 						</div>
 					</div>
@@ -75,6 +74,7 @@
 							<h3>Add items to the cart and come back to see your total.</h3>
 						</div>
 					{% endif %}
+
 				</div>
 				<div class="right-bar">
 					<p><span>Subtotal</span> <span>${{ cart_summary.subtotal|float }}</span></p>
