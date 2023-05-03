@@ -48,11 +48,12 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
 ## Credits
 
 
-Justin Stark https://github.com/JustinStark2022 \
-Mark Whiteside https://github.com/sr71shark \
+Justin Stark -  https://github.com/JustinStark2022 \
+Mark Whiteside - https://github.com/sr71shark \
 Mike Thurig -  https://github.com/ekimt27 \
-Heather Werner \
-Daniela Pirrera 
+Kendrick Powers - https://github.com/W3bhead \
+Heather Werner - \
+Daniela Pirrera - 
 
 <!-- List your collaborators, if any, with links to their GitHub profiles.
 
