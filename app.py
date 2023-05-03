@@ -49,9 +49,6 @@ mongo = PyMongo(app)
 
 api = Api(app) # Initialize the API
 
-if __name__ == "__main__":
-    app.run(debug=True)
-
 db = client.groupies
 coll = db.groupies
 users = db.users
@@ -133,20 +130,18 @@ def item_serializer(item):
 
 
 def calculate_cart_summary(items):
-    subtotal = sum(float(item["price"]) * item["quantity"] for item in items)
-    tax_rate = 0.05
+    subtotal = sum(Decimal(str(item["price"])) * item["quantity"] for item in items)
+    tax_rate = Decimal('0.05')
     tax = round(subtotal * tax_rate, 2)
-    shipping = 10 if subtotal < 50 else 0
+    shipping = Decimal('10') if subtotal < Decimal('50') else Decimal('0')
     total = round(subtotal + tax + shipping, 2)
 
     return {
-        "subtotal": subtotal,
-        "tax": tax,
-        "shipping": shipping,
-        "total": total
+        "subtotal": '{:.2f}'.format(subtotal),
+        "tax": '{:.2f}'.format(tax),
+        "shipping": '{:.2f}'.format(shipping),
+        "total": '{:.2f}'.format(total)
     }
-
-
 
 # API Routes
 @app.route("/about")
@@ -199,7 +194,7 @@ def login():
 
     return render_template("login.html")
 
-
+# admin route
 @app.route("/admin", methods=["GET", "POST"])
 @login_required
 def admin():
@@ -208,8 +203,7 @@ def admin():
     if request.method == "GET":
         items = db.items.find()
         return render_template('admin.html', items=items, username=username)
-        
-    
+
     if request.method == 'POST':
         items = db.items.find()
         newName = request.form.get("newName")
@@ -221,10 +215,14 @@ def admin():
             image_id = fs.put(
                 newImage, filename=newImage.filename, content_type=newImage.content_type
             )
+
+            # Round the price to 2 decimal places
+            price = round(float(newPrice), 2)
+
             db.items.insert_one(
                 {
                     "name": newName,
-                    "price": newPrice,
+                    "price": price,
                     "image": newImage.filename,
                     "image_id": image_id,
                 }
@@ -348,38 +346,57 @@ def add_to_cart():
 #     # Add logic to remove the item with item_id from the user's cart in the database.
 #     return redirect(url_for('shopping_cart'))
 
+@app.before_request
+def before_request():
+    print("Before Request")
+
+@app.after_request
+def after_request(response):
+    print("After Request")
+    return response
+
 # Update cart route
 @app.route("/update_cart", methods=["POST"])
 @login_required
 def update_cart():
+    app.logger.info("update_cart route called")
+    app.logger.info(f"Request payload: {request.json}")
     action = request.json.get("action")
     item_id = request.json.get("item_id")
     quantity = request.json.get("quantity")
 
     if not action or not item_id:
+        app.logger.error("Action or Item ID is missing")
         return jsonify({"error": "Action or Item ID is missing"}), 400
 
     # Get the current user
     user = users.find_one({"username": current_user.username})
 
     if action == "increment":
-        users.update_one(
+        result = users.update_one(
             {"_id": user["_id"], "cart.item_id": ObjectId(item_id)},
             {"$inc": {"cart.$.quantity": 1}},
         )
     elif action == "decrement":
-        users.update_one(
+        result = users.update_one(
             {"_id": user["_id"], "cart.item_id": ObjectId(item_id)},
             {"$inc": {"cart.$.quantity": -1}},
-        )
+    )
+
     elif action == "delete":
-        users.update_one(
+        result = users.update_one(
             {"_id": user["_id"]},
             {"$pull": {"cart": {"item_id": ObjectId(item_id)}}},
         )
     else:
+        app.logger.error("Invalid action")
         return jsonify({"error": "Invalid action"}), 400
 
+    if result.modified_count == 0:
+        app.logger.error("No documents were updated")
+        return jsonify({"error": "No documents were updated"}), 400
+
+    app.logger.info("Cart updated successfully")
     return jsonify({"message": "Cart updated successfully"}), 200
 
 

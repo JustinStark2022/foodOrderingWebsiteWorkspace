@@ -79,12 +79,49 @@ function updateCartItemCount() {
     }
 }
 
-function incrementQuantity(itemId, currentQuantity) {
-    updateCart("update", itemId, currentQuantity + 1);
+function incrementQuantity(itemId) {
+    console.log('incrementQuantity called with itemId:', itemId);
+    const currentQuantity = parseInt(document.querySelector(`input[name="item_id"][value="${itemId}"]`).closest('.content').querySelector(".unit span").textContent, 10);
+    updateCart("increment", itemId, currentQuantity + 1);
 }
 
-function decrementQuantity(itemId, currentQuantity) {
+function decrementQuantity(itemId) {
+    console.log('decrementQuantity called with itemId:', itemId);
+    const currentQuantity = parseInt(document.querySelector(`input[name="item_id"][value="${itemId}"]`).closest('.content').querySelector(".unit span").textContent, 10);
     if (currentQuantity > 1) {
-        updateCart("update", itemId, currentQuantity - 1);
+        updateCart("decrement", itemId, currentQuantity - 1);
+    } else {
+        updateCart("delete", itemId, 0);
+    }
+}
+
+function deleteItem(itemId) {
+	updateCart('delete', itemId);
+  }
+
+async function updateCart(action, itemId, quantity) {
+    console.log("Updating cart:", action, itemId, quantity);
+    const csrfToken = document.getElementsByName("csrf-token")[0].getAttribute("content");
+
+    const data = {
+        "action": action,
+        "item_id": itemId,
+        "quantity": quantity
+    };
+
+    const response = await fetch("/update_cart", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken
+        }
+    });
+
+    if (response.ok) {
+        location.reload();
+    } else {
+        const error = await response.text();
+        throw new Error("Error updating cart.");
     }
 }
