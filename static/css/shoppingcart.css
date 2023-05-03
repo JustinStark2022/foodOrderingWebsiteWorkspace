@@ -265,3 +265,17 @@ body.dark{
 	--bb-color: #0e0e0e;
 }
 
+.delete-btn {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background: transparent;
+	border: none;
+	font-size: 20px;
+	cursor: pointer;
+	z-index: 1; /* Add this line */
+  }
+  
+  .delete-btn:focus {
+	outline: none;
+  }
