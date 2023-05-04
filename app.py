@@ -140,10 +140,10 @@ def item_serializer(item):
 
 
 def calculate_cart_summary(items):
-    subtotal = sum(Decimal(str(item["price"])) * item["quantity"] for item in items)
+    subtotal = round(sum(Decimal(str(item["price"])) * item["quantity"] for item in items), 2)
     tax_rate = Decimal('0.05')
     tax = round(subtotal * tax_rate, 2)
-    shipping = Decimal('10') if subtotal < Decimal('50') else Decimal('0')
+    shipping = round(Decimal('10') if subtotal < Decimal('50') else Decimal('0'), 2)
     total = round(subtotal + tax + shipping, 2)
 
     return {
@@ -240,7 +240,6 @@ def admin():
                 {
                     "name": newName,
                     "price": price,
-                    "price": price,
                     "image": newImage.filename,
                     "image_id": image_id,
                 }
@@ -326,12 +325,10 @@ def add_to_cart():
 
     if not item_id:
         return jsonify({"success": False, "message": "Item ID is missing"}), 400
-        return jsonify({"success": False, "message": "Item ID is missing"}), 400
 
     # Check if the item exists in the items collection
     item = db.items.find_one({"_id": ObjectId(item_id)})
     if not item:
-        return jsonify({"success": False, "message": "Item not found"}), 404
         return jsonify({"success": False, "message": "Item not found"}), 404
 
     # Get the current user
@@ -359,15 +356,6 @@ def add_to_cart():
     app.logger.info(f"User's cart after update: {user['cart']}")
 
     return jsonify({"success": True, "message": "Item added to cart successfully"}), 200
-
-
-# # Remove from cart route
-# @app.route('/remove_from_cart', methods=['POST'])
-# @login_required
-# def remove_from_cart():
-#     item_id = request.form.get('item_id')
-#     # Add logic to remove the item with item_id from the user's cart in the database.
-#     return redirect(url_for('shopping_cart'))
 
 @app.before_request
 def before_request():
