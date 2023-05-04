@@ -309,10 +309,7 @@ def shopping_cart():
         item_details = db.items.find_one({"_id": item["item_id"]})
         item_details["quantity"] = item["quantity"]
         items.append(item_details)
-    for item in cart_items:
-        item_details = db.items.find_one({"_id": item["item_id"]})
-        item_details["quantity"] = item["quantity"]
-        items.append(item_details)
+    
 
     cart_summary = calculate_cart_summary(items)
 
