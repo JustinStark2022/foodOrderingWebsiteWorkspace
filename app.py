@@ -160,8 +160,8 @@ def menu():
 def index():
     print("Page loaded successfully")
     items = db.items.find()
-    return render_template("index.html", items=items)
-
+    is_logged_in = current_user.is_authenticated
+    return render_template("index.html", items=items, current_user=current_user, is_logged_in=is_logged_in)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
