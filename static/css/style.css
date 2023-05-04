@@ -440,6 +440,9 @@ section{
 	section{
 		padding: 50px 4% 40px;
 	}
+	.center-text img{
+		max-width: 1680px;
+	}
 }
 
 @media (max-width: 1220px){
@@ -465,6 +468,9 @@ section{
 	}
 	.box{
 		padding: 10px;
+	}
+	.center-text img{
+		max-width: 1220px;
 	}
 }
 
@@ -497,6 +503,9 @@ section{
 	.navbar.open{
 		top: 100%;
 	}
+	.center-text img{
+		max-width: 1100px;
+	}
 }
 
 @media (max-width: 960px){
@@ -511,12 +520,18 @@ section{
 	section{
 		padding: 65px 4% 55px;
 	}
+	.center-text img{
+		max-width: 960px;
+	}
 }
 
 @media (max-width: 840px){
 	.home{
 		height: 100vh;
 		grid-template-columns: 1fr;
+	}
+	.center-text img{
+		max-width: 840px;
 	}
 	.home-text{
 		order: 2;
@@ -541,6 +556,9 @@ section{
 	
 		text-align: left;
 		font-size: .7em;
+	}
+	.center-text img{
+		max-width: 690px;
 	}
 	.history{
 		grid-template-columns: 1fr;
@@ -572,8 +590,44 @@ section{
 	  --h2-font: 1.8rem;
 	  --p-font: 0.9rem;
 	}
+	.center-text img{
+		width: 500px;
+	}
 }
 
+@media (max-width: 580px){
+	
+	.contact-box{
+
+		margin-left: auto;
+		margin-right: auto;
+
+	}
+	.contact-box a img{
+
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.contact-box h3{
+
+		margin-left: auto;
+		margin-right: auto;
+		display: none;
+	}
+
+	.contact-box li{
+
+		margin-left: auto;
+		margin-right: auto;
+		display: none;
+		
+
+	}
+	.center-text img{
+		max-width: 580px;
+	}
+
+}
 
 
 
