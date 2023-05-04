@@ -21,26 +21,65 @@
 
 	<!--===header--==-->
 	<header>
-		<a href="/" class="logo">
+		<a href='/' class="logo">
 			<img src="/static/img/logo.png">
 		</a>
+		
+		<div class="greet-user" style="margin-top: -30px;">
+			
+				{% if is_logged_in %}
 
-		<ul class="navbar">
-			<li><a href="/">Home</a></li>
-			<li><a href="about"class="active">History of Groupie's Pizza</a></li>
-			<li><a href="menu">Menu</a></li>
+				<p>Welcome, {{ current_user.username }}</p>
+
+				{% endif %}
+			
+		</div>
+		
+	
+		<ul class="navbar" style="margin-right: auto;">
+			<li>
+	
+				<a href="/">Home</a>
+			
+			</li>
+	
+			<li>
+				
+				<a href="about">History of Groupie's Pizza</a>
+			
+			</li>
+			
+			<li>
+				
+				<a href="menu">Menu</a>
+			
+			</li>
 		</ul>
-
+	
 		<div class="header-icons">
-		<!--<a href="#"><i class='bx bx-search'></i></a>-->	
-		<!--<a href="#"><i class='bx bxs-bell' ></i></a>-->	
-			<a href="shoppingcart"><i class='bx bxs-cart' ></i></a>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+			<div>
+				{% if is_logged_in %}
+				<a href="/logout"  >
+					<button style="padding-left: 10px; padding-right: 10px; ">Logout</button>
+				</a>
+				{% else %}
+				<a href="/login"  >
+					<button style="padding-left: 10px; padding-right: 10px; display: flex;">Login</button>
+				</a>
+				<a href="register"  >
+					<button style="padding-left: 10px; padding-right: 10px; margin-top: 10px;display: flex;">Register</button>
+				</a>
+				{% endif %}
+			</div>
+			
+				<a href="shoppingcart"><i class='bx bxs-cart' ></i></a>
 			<div class="bx bx-menu" id="menu-icon"></div>
-
+	
 			<!----darkmode-->
 			<div class="bx bx-moon" id="darkmode"></div>
 		</div>
 	</header>
+
 	 <!--===history--==-->
 	 
 

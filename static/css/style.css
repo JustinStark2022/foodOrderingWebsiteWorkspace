@@ -90,6 +90,7 @@ header{
 	margin-left: 20px;
 	transition: all ease.50s;
 }
+
 .header-icons i:hover{
 	transform: scale(1.1) translateX(-5px);
 	color: var(--main-color);

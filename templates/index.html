@@ -36,7 +36,7 @@
 		</div>
 		
 	
-		<ul class="navbar">
+		<ul class="navbar" style="margin-right: auto;">
 			<li>
 	
 				<a href="/">Home</a>
@@ -60,14 +60,14 @@
 			<div>
 				{% if is_logged_in %}
 				<a href="/logout"  >
-					<button style="padding-left: 10px; padding-right: 10px;">Logout</button>
+					<button style="padding-left: 10px; padding-right: 10px; ">Logout</button>
 				</a>
 				{% else %}
 				<a href="/login"  >
-					<button style="padding-left: 10px; padding-right: 10px;">Login</button>
+					<button style="padding-left: 10px; padding-right: 10px; display: flex;">Login</button>
 				</a>
 				<a href="register"  >
-					<button style="padding-left: 10px; padding-right: 10px; margin-left: 20px;">Register</button>
+					<button style="padding-left: 10px; padding-right: 10px; margin-top: 10px;display: flex;">Register</button>
 				</a>
 				{% endif %}
 			</div>

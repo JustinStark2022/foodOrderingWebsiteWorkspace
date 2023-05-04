@@ -156,14 +156,17 @@ def calculate_cart_summary(items):
 # API Routes
 @app.route("/about")
 def about():
-    return render_template("about.html")
+    print("Page loaded successfully")
+    is_logged_in = current_user.is_authenticated
+    return render_template("about.html", current_user=current_user, is_logged_in=is_logged_in)
 
 
 @app.route("/menu")
 def menu():
-    print("page loaded successfully")
+    print("Page loaded successfully")
     items = db.items.find()
-    return render_template("menu.html", items=items)
+    is_logged_in = current_user.is_authenticated
+    return render_template("menu.html", items=items, current_user=current_user, is_logged_in=is_logged_in)
 
 
 @app.route("/")
@@ -297,7 +300,9 @@ def register():
 @login_required
 def shopping_cart():
     user = users.find_one({"username": current_user.username})
+    is_logged_in = current_user.is_authenticated
     cart_items = user['cart']
+    
 
     items = []
     for item in cart_items:
@@ -311,7 +316,7 @@ def shopping_cart():
 
     cart_summary = calculate_cart_summary(items)
 
-    return render_template('shoppingcart.html', username=current_user.username, items=items, cart_summary=cart_summary)
+    return render_template('shoppingcart.html', username=current_user.username, items=items, cart_summary=cart_summary,  is_logged_in= is_logged_in)
 
 
 # Add to cart route
