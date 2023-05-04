@@ -35,3 +35,28 @@
 2023-05-03 09:44:32,054 INFO: update_cart route called [in /app/app.py:362]
 2023-05-03 09:44:32,056 INFO: Request payload: {'action': 'delete', 'item_id': '644fddc527d4a8df36e00e3a'} [in /app/app.py:363]
 2023-05-03 09:44:32,231 INFO: Cart updated successfully [in /app/app.py:399]
+2023-05-04 22:17:48,303 INFO: Application startup [in /app/app.py:78]
+2023-05-04 22:18:09,862 ERROR: Exception on /shoppingcart [GET] [in /usr/local/lib/python3.11/site-packages/flask/app.py:1414]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_restful/__init__.py", line 271, in error_router
+    return original_handler(e)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app.py", line 310, in shopping_cart
+    item_details["quantity"] = item["quantity"]
+    ~~~~~~~~~~~~^^^^^^^^^^^^
+TypeError: 'NoneType' object does not support item assignment
