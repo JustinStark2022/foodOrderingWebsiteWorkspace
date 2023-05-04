@@ -25,15 +25,24 @@
 			<img src="/static/img/logo.png">
 		</a>
 		
-		
+		<div class="greet-user" style="margin-top: -30px;">
+			
+				{% if is_logged_in %}
 
+				<p>Welcome, {{ current_user.username }}</p>
+
+				{% endif %}
+			
+		</div>
+		
+	
 		<ul class="navbar">
 			<li>
-
+	
 				<a href="/">Home</a>
 			
 			</li>
-
+	
 			<li>
 				
 				<a href="about">History of Groupie's Pizza</a>
@@ -46,21 +55,26 @@
 			
 			</li>
 		</ul>
-
+	
 		<div class="header-icons">
 			<div>
-				<a href="login"  >
+				{% if is_logged_in %}
+				<a href="/logout"  >
+					<button style="padding-left: 10px; padding-right: 10px;">Logout</button>
+				</a>
+				{% else %}
+				<a href="/login"  >
 					<button style="padding-left: 10px; padding-right: 10px;">Login</button>
 				</a>
-			</div>	
-			<div>
 				<a href="register"  >
 					<button style="padding-left: 10px; padding-right: 10px; margin-left: 20px;">Register</button>
 				</a>
-			</div>	
-			<a href="shoppingcart"><i class='bx bxs-cart' ></i></a>
+				{% endif %}
+			</div>
+			
+				<a href="shoppingcart"><i class='bx bxs-cart' ></i></a>
 			<div class="bx bx-menu" id="menu-icon"></div>
-
+	
 			<!----darkmode-->
 			<div class="bx bx-moon" id="darkmode"></div>
 		</div>
