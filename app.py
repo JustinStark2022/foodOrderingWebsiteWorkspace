@@ -1,4 +1,11 @@
-from decimal import Decimal # for tax calculation
+"""
+Food Ordering Website
+"""
+
+import os  # for file paths
+from decimal import Decimal  # for tax calculation
+import logging  # for logging
+from logging.handlers import RotatingFileHandler  # for logging
 from flask import (
     Flask,
     Response,
@@ -27,29 +34,22 @@ from flask_login import (
     current_user,
 )  # for user authentication
 from flask_wtf.csrf import CSRFProtect  # for CSRF protection
+from flask_restful import Resource, Api  # for RESTful API
 import config  # for secrets
-import os # for file paths
-import logging # for logging
-from logging.handlers import RotatingFileHandler # for logging
-from flask_restful import Resource, Api # for RESTful API
-from bson.objectid import ObjectId # for converting string id to bson object id
-
-# Added to prevent backend secrets from being shared on public git repo. 
-# Requires a config.py file with connection string inside as a variable  "uri"
-uri = config.uri
+# Added to prevent backend secrets from being shared on public git repo.
+# # Requires a config.py file with connection string inside as a variable  "uri"
+URI = config.uri
 
 # Create a new client and connect to the server
-client = MongoClient(uri, server_api=ServerApi("1"))
-
-
+client = MongoClient(URI, server_api=ServerApi("1"))
 
 app = Flask(__name__, template_folder="templates")
-app.config["MONGO_URI"] = uri
+app.config["MONGO_URI"] = URI
 app.secret_key = config.secret_key
 csrf = CSRFProtect(app)
 mongo = PyMongo(app)
 
-api = Api(app) # Initialize the API
+api = Api(app)  # Initialize the API
 
 db = client.groupies
 coll = db.groupies
@@ -66,11 +66,6 @@ if not app.debug:
             "%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]"
         )
     )
-    if not os.path.exists('logs'):
-        os.mkdir('logs')
-    file_handler = RotatingFileHandler('logs/app.log', maxBytes=10240, backupCount=10)
-    file_handler.setFormatter(logging.Formatter(
-        '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
     file_handler.setLevel(logging.INFO)
     app.logger.addHandler(file_handler)
 
@@ -78,14 +73,14 @@ if not app.debug:
     app.logger.info("Application startup")
 
 # Initialize the login manager
-
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
 
 
-# This class is used by Flask-Login to represent a user
 class User(UserMixin):
+    """This class is used by Flask-Login to represent a user"""
+
     def __init__(self, user_id, username, password):
         self.id = user_id
         self.username = username
@@ -98,27 +93,26 @@ class User(UserMixin):
     @property
     def is_active(self):
         return self.active
-    
-class ItemsAPI(Resource):
-    def get(self):
-        items = db.items.find()
-        items_list = [item_serializer(item) for item in items]
-        return jsonify(items_list)
+
 
 class ShoppingCart(Resource):
+    """This class pulls a shopping cart for the user from mongoDB"""
+
     @login_required
     def get(self):
+        """This function returns the shopping cart for the user"""
         user = db.users.find_one({"username": current_user.username})
         cart_items = user.get("cart", [])
         cart_summary = calculate_cart_summary(cart_items)
         return jsonify(cart_summary)
 
-api.add_resource(ItemsAPI, '/api/items')
+
 api.add_resource(ShoppingCart, "/api/shoppingcart")
 
-# This function is used by Flask-Login to load a user from the database
+
 @login_manager.user_loader
 def load_user(user_id):
+    """This function is used by Flask-Login to load a user from the database given an id"""
     user_data = users.find_one({"_id": ObjectId(user_id)})
     if user_data:
         return User(
@@ -131,6 +125,7 @@ def load_user(user_id):
 
 
 def item_serializer(item):
+    """This function serializes an item from the database"""
     return {
         "id": str(item["_id"]),
         "name": item["name"],
@@ -140,44 +135,58 @@ def item_serializer(item):
 
 
 def calculate_cart_summary(items):
-    subtotal = round(sum(Decimal(str(item["price"])) * item["quantity"] for item in items), 2)
-    tax_rate = Decimal('0.05')
+    """This function calculates the subtotal, tax, shipping, and total for the cart"""
+    subtotal = round(
+        sum(Decimal(str(item["price"])) * item["quantity"] for item in items), 2
+    )
+    tax_rate = Decimal("0.05")
     tax = round(subtotal * tax_rate, 2)
-    shipping = round(Decimal('10') if subtotal < Decimal('50') else Decimal('0'), 2)
+    shipping = round(Decimal("10") if subtotal < Decimal("50") else Decimal("0"), 2)
     total = round(subtotal + tax + shipping, 2)
 
     return {
-        "subtotal": '{:.2f}'.format(subtotal),
-        "tax": '{:.2f}'.format(tax),
-        "shipping": '{:.2f}'.format(shipping),
-        "total": '{:.2f}'.format(total)
-    }
+    "subtotal": f"{subtotal:.2f}",
+    "tax": f"{tax:.2f}",
+    "shipping": f"{shipping:.2f}",
+    "total": f"{total:.2f}",
+}
 
 # API Routes
 @app.route("/about")
 def about():
+    """This function renders the about page"""
     print("Page loaded successfully")
     is_logged_in = current_user.is_authenticated
-    return render_template("about.html", current_user=current_user, is_logged_in=is_logged_in)
+    return render_template(
+        "about.html", current_user=current_user, is_logged_in=is_logged_in
+    )
 
 
 @app.route("/menu")
 def menu():
+    """This function renders the menu page"""
     print("Page loaded successfully")
     items = db.items.find()
     is_logged_in = current_user.is_authenticated
-    return render_template("menu.html", items=items, current_user=current_user, is_logged_in=is_logged_in)
+    return render_template(
+        "menu.html", items=items, current_user=current_user, is_logged_in=is_logged_in
+    )
 
 
 @app.route("/")
 def index():
+    """This function renders the index page"""
     print("Page loaded successfully")
     items = db.items.find()
     is_logged_in = current_user.is_authenticated
-    return render_template("index.html", items=items, current_user=current_user, is_logged_in=is_logged_in)
+    return render_template(
+        "index.html", items=items, current_user=current_user, is_logged_in=is_logged_in
+    )
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    """This function renders the login page and handles user login"""
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
@@ -207,17 +216,19 @@ def login():
 
     return render_template("login.html")
 
+
 # admin route
 @app.route("/admin", methods=["GET", "POST"])
 @login_required
 def admin():
+    """This function renders the admin page and handles adding new items to the menu"""
     username = current_user.username
 
     if request.method == "GET":
         items = db.items.find()
-        return render_template('admin.html', items=items, username=username)
+        return render_template("admin.html", items=items, username=username)
 
-    if request.method == 'POST':
+    if request.method == "POST":
         items = db.items.find()
         newName = request.form.get("newName")
         newPrice = request.form.get("newPrice")
@@ -231,7 +242,6 @@ def admin():
 
             # Round the price to 2 decimal places
             price = round(float(newPrice), 2)
-
 
             # Round the price to 2 decimal places
             price = round(float(newPrice), 2)
@@ -254,12 +264,14 @@ def admin():
 @app.route("/logout")
 @login_required
 def logout():
+    """This function logs the user out"""
     logout_user()
     return redirect(url_for("index"))
 
 
 @app.route("/image/<filename>")
 def image(filename):
+    """This function returns the image with the given filename"""
     fs = GridFS(db)
     stored_image = fs.find_one({"filename": filename})
     if stored_image:
@@ -270,6 +282,7 @@ def image(filename):
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    """This function renders the register page and handles user registration"""
     if request.method == "POST":
         # Check if the user already exists
         existing_user = users.find_one({"username": request.form["username"]})
@@ -295,33 +308,39 @@ def register():
     return render_template("register.html")
 
 
-@app.route('/shoppingcart')
+@app.route("/shoppingcart")
 @login_required
 def shopping_cart():
+    """This function renders the shopping cart page"""
     user = users.find_one({"username": current_user.username})
     is_logged_in = current_user.is_authenticated
-    cart_items = user['cart']
-    
+    cart_items = user["cart"]
 
     items = []
     for item in cart_items:
         item_details = db.items.find_one({"_id": item["item_id"]})
         item_details["quantity"] = item["quantity"]
         items.append(item_details)
-    
 
     cart_summary = calculate_cart_summary(items)
 
-    return render_template('shoppingcart.html', username=current_user.username, items=items, cart_summary=cart_summary,  is_logged_in= is_logged_in)
+    return render_template(
+        "shoppingcart.html",
+        username=current_user.username,
+        items=items,
+        cart_summary=cart_summary,
+        is_logged_in=is_logged_in,
+    )
 
 
 # Add to cart route
 @app.route("/add_to_cart", methods=["POST"])
 @login_required
 def add_to_cart():
+    """This function adds an item to the user's cart"""
     app.logger.info("Request received at /add_to_cart")
     item_id = request.json.get("item_id")
-    app.logger.info(f"Item ID received: {item_id}")
+    app.logger.info("Item ID received: %s, {item_id}")
 
     if not item_id:
         return jsonify({"success": False, "message": "Item ID is missing"}), 400
@@ -333,7 +352,7 @@ def add_to_cart():
 
     # Get the current user
     user = users.find_one({"username": current_user.username})
-    app.logger.info(f"User's cart before update: {user['cart']}")
+    app.logger.info("User's cart before update: %s, {user['cart']}")
 
     # Check if the item is already in the user's cart
     cart_item = next((i for i in user["cart"] if str(i["item_id"]) == item_id), None)
@@ -353,28 +372,20 @@ def add_to_cart():
 
     # Fetch the updated user data
     user = users.find_one({"username": current_user.username})
-    app.logger.info(f"User's cart after update: {user['cart']}")
+    app.logger.info("User's cart after update: %s, {user['cart']}")
 
     return jsonify({"success": True, "message": "Item added to cart successfully"}), 200
 
-@app.before_request
-def before_request():
-    print("Before Request")
-
-@app.after_request
-def after_request(response):
-    print("After Request")
-    return response
 
 # Update cart route
 @app.route("/update_cart", methods=["POST"])
 @login_required
 def update_cart():
+    """This function updates the quantity of an item in the user's cart"""
     app.logger.info("update_cart route called")
-    app.logger.info(f"Request payload: {request.json}")
+    app.logger.info("Request payload:%s, {request.json}")
     action = request.json.get("action")
     item_id = request.json.get("item_id")
-    quantity = request.json.get("quantity")
 
     if not action or not item_id:
         app.logger.error("Action or Item ID is missing")
@@ -392,7 +403,7 @@ def update_cart():
         result = users.update_one(
             {"_id": user["_id"], "cart.item_id": ObjectId(item_id)},
             {"$inc": {"cart.$.quantity": -1}},
-    )
+        )
 
     elif action == "delete":
         result = users.update_one(
@@ -413,6 +424,7 @@ def update_cart():
 
 @app.route("/checkout")
 def checkout():
+    """This function renders the checkout page"""
     return render_template("checkout.html")
 
 
