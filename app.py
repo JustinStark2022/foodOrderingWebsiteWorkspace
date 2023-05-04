@@ -33,6 +33,7 @@ import logging  # for logging
 from logging.handlers import RotatingFileHandler  # for logging
 from flask_restful import Resource, Api  # for RESTful API
 from bson.objectid import ObjectId  # for converting string id to bson object id
+import stripe
 
 # Added to prevent backend secrets from being shared on public git repo. 
 # Requires a config.py file with connection string inside as a variable  "uri"
@@ -40,7 +41,7 @@ uri = config.uri
 
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi("1"))
-
+stripe.api_key = 'sk_test_4eC39HqLyjWDarjtT1zdp7dc'
 
 app = Flask(__name__, template_folder="templates")
 app.config["MONGO_URI"] = uri
@@ -421,6 +422,26 @@ def update_cart():
 @app.route("/checkout")
 def checkout():
     return render_template("checkout.html")
+
+@app.route('/create-checkout-session', methods=['POST'])
+def create_checkout_session():
+    try:
+        checkout_session = stripe.checkout.Session.create(
+            line_items=[
+                {
+                    # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+                    'price': '{{PRICE_ID}}',
+                    'quantity': 1,
+                },
+            ],
+            mode='payment',
+            success_url='success.html',
+            cancel_url='cancel.html',
+        )
+    except Exception as e:
+        return str(e)
+
+    return redirect(checkout_session.url, code=303)
 
 
 if __name__ == "__main__":

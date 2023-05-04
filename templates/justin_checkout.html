@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Groupie's Pizza Shopping Cart</title>
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="/static/css/shoppingcart.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-</head>
-<body>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="csrf-token" content="{{ csrf_token() }}">
+
+    	<title>Groupie's Pizza Shopping Cart</title>
+    	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="/static/css/shoppingcart.css" rel="stylesheet">
+		<!--===box icons link--==-->
+		<link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+		<!--===google fonts link--==-->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+	</head>
+
+	<body>
 		<!--===header--==-->
 		<header>
 			<a href="/" class="logo" style="margin-right: auto;">
@@ -55,17 +60,19 @@
 					{% if items|length > 0 %}
 					{% for item in items %}
 					<div class="cart-box">
-						<button onclick="deleteItem('{{ item._id }}')" class="delete-btn">X</button>
-						<img src="{{ url_for('image', filename=item.image) }}" alt="Item image">
+						<img src="{{ url_for('image', filename=item['image']) }}" alt="Item image">
 						<div class="content">
-							<h3>{{ item.name }}</h3>
-							<h4>Price: ${{ item.price }}</h4>
-							<p class="unit">Quantity: <span>{{ item.quantity }}</span></p>
-							<input type="hidden" name="item_id" value="{{ item._id }}">							
-							<p class="btn-area">
-								<button onclick="decrementQuantity('{{ item._id }}')" class="btn2">-</button>
-								<button onclick="incrementQuantity('{{ item._id }}')" class="btn2">+</button>
-							</p>
+							<h3>{{ item["name"] }}</h3>
+							<h4>Price: ${{ item["price"] }}</h4>
+							<form method="POST" action="{{ url_for('remove_from_cart') }}">
+								<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+								<p class="unit">Quantity: <input name="quantity" value="{{ item['quantity'] }}" readonly></p>
+								<input type="hidden" name="item_id" value="{{ item['_id'] }}">
+								<p class="btn-area">
+									<i aria-hidden="true" class="fa fa-trash"></i>
+									<button type="submit" class="btn2">Remove</button>
+								</p>
+							</form>
 						</div>
 					</div>
 					{% endfor %}
@@ -74,7 +81,6 @@
 							<h3>Add items to the cart and come back to see your total.</h3>
 						</div>
 					{% endif %}
-
 				</div>
 				<div class="right-bar">
 					<p><span>Subtotal</span> <span>${{ cart_summary.subtotal|float }}</span></p>
@@ -84,11 +90,12 @@
 					<p><span>Shipping</span> <span>${{ cart_summary.shipping|float }}</span></p>
 					<hr>
 					<p><span>Total</span> <span>${{ cart_summary.total|float }}</span></p><a href="checkout"><i class="fa fa-shopping-cart"></i>Checkout</a>
-
+					
 				</div>
+				
 			</div>
 		</div>
-		<!-- Include script.js file -->
+		<!--===js file link--==-->
 		<script src="/static/js/script.js"></script>
 	</body>
-	</html>
+</html>
