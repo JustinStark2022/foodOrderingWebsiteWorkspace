@@ -34,11 +34,13 @@ from logging.handlers import RotatingFileHandler # for logging
 from flask_restful import Resource, Api # for RESTful API
 from bson.objectid import ObjectId # for converting string id to bson object id
 
-# Added to prevent backend secrets from being shared on public git repo. Requires a config.py file with connection string inside as a variable  "uri"
+# Added to prevent backend secrets from being shared on public git repo. 
+# Requires a config.py file with connection string inside as a variable  "uri"
 uri = config.uri
 
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi("1"))
+
 
 
 app = Flask(__name__, template_folder="templates")
@@ -56,16 +58,19 @@ carts = db.carts
 
 # Set up logging
 if not app.debug:
-    if not os.path.exists('logs'):
-        os.mkdir('logs')
-    file_handler = RotatingFileHandler('logs/app.log', maxBytes=10240, backupCount=10)
-    file_handler.setFormatter(logging.Formatter(
-        '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
+    if not os.path.exists("logs"):
+        os.mkdir("logs")
+    file_handler = RotatingFileHandler("logs/app.log", maxBytes=10240, backupCount=10)
+    file_handler.setFormatter(
+        logging.Formatter(
+            "%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]"
+        )
+    )
     file_handler.setLevel(logging.INFO)
     app.logger.addHandler(file_handler)
 
     app.logger.setLevel(logging.INFO)
-    app.logger.info('Application startup')
+    app.logger.info("Application startup")
 
 # Initialize the login manager
 
@@ -219,9 +224,14 @@ def admin():
             # Round the price to 2 decimal places
             price = round(float(newPrice), 2)
 
+
+            # Round the price to 2 decimal places
+            price = round(float(newPrice), 2)
+
             db.items.insert_one(
                 {
                     "name": newName,
+                    "price": price,
                     "price": price,
                     "image": newImage.filename,
                     "image_id": image_id,
@@ -244,9 +254,9 @@ def logout():
 @app.route("/image/<filename>")
 def image(filename):
     fs = GridFS(db)
-    image = fs.find_one({"filename": filename})
-    if image:
-        return Response(image.read(), content_type=image.content_type)
+    stored_image = fs.find_one({"filename": filename})
+    if stored_image:
+        return Response(stored_image.read(), content_type=stored_image.content_type)
     else:
         return "Image not found", 404
 
@@ -289,6 +299,10 @@ def shopping_cart():
         item_details = db.items.find_one({"_id": item["item_id"]})
         item_details["quantity"] = item["quantity"]
         items.append(item_details)
+    for item in cart_items:
+        item_details = db.items.find_one({"_id": item["item_id"]})
+        item_details["quantity"] = item["quantity"]
+        items.append(item_details)
 
     cart_summary = calculate_cart_summary(items)
 
@@ -305,10 +319,12 @@ def add_to_cart():
 
     if not item_id:
         return jsonify({"success": False, "message": "Item ID is missing"}), 400
+        return jsonify({"success": False, "message": "Item ID is missing"}), 400
 
     # Check if the item exists in the items collection
     item = db.items.find_one({"_id": ObjectId(item_id)})
     if not item:
+        return jsonify({"success": False, "message": "Item not found"}), 404
         return jsonify({"success": False, "message": "Item not found"}), 404
 
     # Get the current user
@@ -400,9 +416,9 @@ def update_cart():
     return jsonify({"message": "Cart updated successfully"}), 200
 
 
-@app.route('/checkout')
+@app.route("/checkout")
 def checkout():
-    return render_template('checkout.html')
+    return render_template("checkout.html")
 
 
 if __name__ == "__main__":
