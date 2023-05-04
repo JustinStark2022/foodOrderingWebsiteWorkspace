@@ -536,6 +536,12 @@ section{
 }
 
 @media (max-width: 690px){
+	
+	.greet-user p{
+	
+		text-align: left;
+		font-size: .7em;
+	}
 	.history{
 		grid-template-columns: 1fr;
 	}
