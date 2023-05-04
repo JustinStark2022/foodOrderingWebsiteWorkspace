@@ -420,6 +420,18 @@ section{
 	letter-spacing: 1px;
 }
 
+.greet-user{
+
+	margin-right:auto;
+	margin-left: 15px ;
+
+}
+.greet-user h4{
+
+	text-align: left;
+
+}
+
 @media (max-width: 1680px){
 	header{
 		padding: 10px 4%;
