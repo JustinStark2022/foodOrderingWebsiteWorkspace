@@ -70,9 +70,9 @@
 							<h4>Price: ${{ item.price }}</h4>
 							<p class="unit">Quantity: <span>{{ item.quantity }}</span></p>
 							<input type="hidden" name="item_id" value="{{ item._id }}">							
-							<p class="btn-area">
-								<button onclick="decrementQuantity('{{ item._id }}')" class="btn2">-</button>
-								<button onclick="incrementQuantity('{{ item._id }}')" class="btn2">+</button>
+							<p style="background:  #f24f04;"  class="btn-area">
+								<button onclick="decrementQuantity('{{ item._id }}')" class="btn2" >-</button>
+								<button onclick="incrementQuantity('{{ item._id }}')" class="btn2" >+</button>
 							</p>
 						</div>
 					</div>
@@ -91,7 +91,7 @@
 					<hr>
 					<p><span>Delivery</span> <span>${{ cart_summary.shipping  }}</span></p>
 					<hr>
-					<p><span>Total</span> <span>${{ cart_summary.total  }}</span></p><a href="checkout"><i class="fa fa-shopping-cart"></i>Checkout</a>
+					<p><span>Total</span> <span >${{ cart_summary.total  }}</span></p><a style="background:  #f24f04;" href="checkout"><i></i>Checkout</a>
 
 				</div>
 			</div>
