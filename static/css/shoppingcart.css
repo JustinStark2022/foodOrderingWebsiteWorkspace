@@ -227,6 +227,66 @@ body{
 .right-bar a:hover {
 	background-color: #3972a7;
 }
+
+.contact{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+	gap: 1rem;
+}
+.contact-box .logo img{
+	width: 140px;
+	max-width: 100%;
+	height: auto;
+	margin-bottom: 1.1rem;
+}
+.icons i{
+	height: 35px;
+	width: 35px;
+	background: var(--main-color);
+	color: var(--bg-color);
+	font-size: 18px;
+	margin-right: 8px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 0.5rem;
+	transition: all ease .50s;
+}
+.icons i:hover{
+	transform: translateY(-5px);
+	background: var(--bb-color);
+	color: var(--text-color);
+}
+.contact-box h3{
+	font-size: 18px;
+	font-weight: 900;
+	font-family: 'Playfair Display', serif;
+	margin-bottom: 20px;
+}
+.contact-box li{
+	margin-bottom: 13px;
+}
+.contact-box li a{
+	display: block;
+	color: var(--other-color);
+	font-size: var(--p-font);
+	transition: all ease .50s;
+}
+.contact-box li a:hover{
+	transform: translateY(-5px);
+	color: var(--main-color);
+}
+
+.copyright p{
+	text-align: center;
+	padding: 18px;
+	background: var(--bb-color);
+	font-size: 14px;
+	font-weight: 500;
+	color: var(--other-color);
+	letter-spacing: 1px;
+}
+
 @media (max-width: 1680px){
 	header{
 		padding: 10px 4%;
@@ -259,6 +319,7 @@ body{
 	}
 }
 @media (max-width: 1100px){
+
 	#menu-icon{
 		display: block;
 	}
